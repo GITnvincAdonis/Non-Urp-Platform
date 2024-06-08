@@ -1,0 +1,82 @@
+ :root{
+
+	transition-duration: 200ms;
+
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: flex-end;
+	
+	
+	
+} 
+.visible{
+	background-color: black;
+	
+}
+.test{
+	background-color: rgba(31,31,31,.8); 
+	height: 100%;
+	width: 100%;
+	padding: 10px 60px 10px 60px;
+	border-width: 2px;
+	border-color: black;
+	align-self: center;
+	
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: row;
+	
+}
+.mega-Image-Container{
+	
+	width: 600px;
+	display:flex;
+	flex-direction: row;
+	flex-wrap: wrap ;
+	
+}
+.option-container{
+	transition-duration: 100ms;
+	transition-timing-function: ease-in;
+	display: flex;
+	justify-content: flex-end;
+	margin: 5px;
+	height: 180px;
+	width: 180px;
+	border-width: 2px;
+	border-color: black;
+	
+	
+	
+}
+.render-texture{
+	border-width: 2px;
+	border-color: black;
+	opacity: 0.4;
+	margin-left: 2%;
+	height: 400px;
+	width: 400px;
+	
+}
+.option-container-0,.option-container-1{
+	height: 100px;
+	width:275px;
+	
+	
+}
+.text{
+	
+	color: white;
+	-unity-text-align: lower-center;
+	font-size: 30px;
+	translate: 0 20px;
+	width: 100%;
+
+}
+.option-container:hover{
+	scale: 1.02;
+	opacity: 0.6;
+	background-color: black;
+}

@@ -1,0 +1,57 @@
+:root{
+	transition-duration: 200ms;
+	background-color: black;
+	
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: flex-end;
+}
+.visible{
+	
+	background-color: rgb(132, 123, 255);
+}
+.lvl-container{
+	transition-duration: 100ms;
+	display: flex;
+	flex-direction:row;
+	justify-content: center;
+	align-items: center;
+	height: 90%;
+	width: 100%;
+
+	align-self: center;
+}
+.levels:hover{
+	
+	scale: 1.051;
+	background-color:rgba(41,41,41,0.8);
+	
+}
+.levels:hover > .text{
+	opacity: 1;
+	
+}
+.levels{
+	
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	transition-duration: 150ms;
+	margin: 5px;
+	
+	border-width: 2px;
+	border-color: black;
+	width:200px;
+	height: 300px;
+	
+	
+}
+
+.text{
+	
+	transition-duration: 100ms;
+	opacity:0;
+	color: white;
+	font-size: 25px;
+}
