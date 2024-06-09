@@ -185,7 +185,7 @@ public partial class @CONTROLSASSET: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""67f73b3c-2736-4864-b4d5-16dff06e9482"",
-                    ""path"": ""<Keyboard>/{Cancel}"",
+                    ""path"": ""<Keyboard>/backquote"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -721,7 +721,7 @@ public partial class @CONTROLSASSET: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""93ccdef5-d0c3-4293-9dc0-bbdcf85a94a1"",
-                    ""path"": ""<Keyboard>/{Cancel}"",
+                    ""path"": ""<Keyboard>/backquote"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",

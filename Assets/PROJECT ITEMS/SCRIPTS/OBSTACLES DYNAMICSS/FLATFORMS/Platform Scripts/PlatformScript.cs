@@ -5,6 +5,7 @@ using DG.Tweening;
 using System.Threading.Tasks;
 using Unity.Loading;
 using Unity.VisualScripting;
+using UnityEditor;
 
 
 
@@ -45,9 +46,12 @@ public class PlatformScript : MonoBehaviour
     [SerializeField] private float SpeedIncrease;
     [SerializeField] private float upwardsForce;
     [SerializeField] private Transform DirectionSource;
+
+    private Vector3 initialPos;
     // Start is called before the first frame update
     private void Awake()
     {
+        initialPos = transform.position;    
         if (BehaviourType == PlatformBehaviour.oneWay)  collider.enabled =false;
          
     }
@@ -164,11 +168,23 @@ public class PlatformScript : MonoBehaviour
     }
     private void OnDrawGizmos()
     {
-        if (BehaviourType == PlatformBehaviour.UpWardBlowers)
+        Gizmos.color = Color.white;
+        
+        /*if (BehaviourType == PlatformBehaviour.UpWardBlowers)
         {
-            Gizmos.color = Color.yellow;
-            Gizmos.DrawLine(DirectionSource.position, transform.position + (DirectionSource.position - transform.position)*3);
+            
+            Gizmos.DrawLine(DirectionSource.position, transform.position + (DirectionSource.position - transform.position) * 3);
             Physics.Raycast(transform.position, transform.up, 20);
+        }*/
+         if(BehaviourType == PlatformBehaviour.LineMove)
+        {
+            //Vector3 postionDif = (transform.position +Displacement) - transform.position;
+            
+            Gizmos.DrawLine(initialPos, initialPos + Displacement);
+            Gizmos.DrawSphere(initialPos, .4f);
+            Gizmos.DrawSphere(initialPos + Displacement, .4f);
+
+            
         }
     }
 

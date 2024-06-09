@@ -103,6 +103,8 @@ public class Movement : MonoBehaviour
         _inputActions.UI.Unpause.started += UnpauseEnabled;
         _inputActions.UI.Unpause.performed += UnpauseEnabled;
         _inputActions.UI.Unpause.canceled += UnpauseEnabled;
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
 
     }
     void Start()
@@ -112,16 +114,19 @@ public class Movement : MonoBehaviour
     void PauseEnabled(InputAction.CallbackContext context)
     {
         
-            _inputActions.MOVES.Disable();
+        _inputActions.MOVES.Disable();
             _inputActions.UI.Enable();
-        
-        
-            
-       
+        Cursor.visible = true;
+
+
+
     }
     void UnpauseEnabled(InputAction.CallbackContext context) {
+        
         _inputActions.MOVES.Enable();
         _inputActions.UI.Disable();
+        Cursor.lockState = CursorLockMode.Confined;
+        Cursor.visible = false;
     }
     void MovementAssignment(InputAction.CallbackContext context)
     {

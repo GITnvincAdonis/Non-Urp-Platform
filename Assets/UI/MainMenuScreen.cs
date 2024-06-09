@@ -67,6 +67,7 @@ public class MainMenuScreen : MonoBehaviour
 
     private void Awake()
     {
+       
         optiontext[0] = "Return";
         optiontext[1] = "Restart";
         optiontext[2] = "Home";
@@ -76,6 +77,7 @@ public class MainMenuScreen : MonoBehaviour
     }
     private void Start()
     {
+        
         StartCoroutine(GeneratePlayingUI());
         FadeFromBlack();
     }
@@ -84,16 +86,21 @@ public class MainMenuScreen : MonoBehaviour
        
         if (pauseManager.IsPaused == false && state == MenuState.Paused)
         {
+
+            
             state = MenuState.LevelScreen;
             StartCoroutine(GeneratePlayingUI());
             
         }
         else if (pauseManager.IsPaused == true && state == MenuState.LevelScreen)
         {
+            
             state = MenuState.Paused;
             StartCoroutine(GenerateMenuUI());
 
         }
+        
+       
         
     }
     private void OnValidate()
