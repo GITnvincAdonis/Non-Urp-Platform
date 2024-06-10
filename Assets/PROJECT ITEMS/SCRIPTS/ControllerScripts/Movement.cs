@@ -14,6 +14,7 @@ enum States
     fallingState,
     SlideState,
     LauchState,
+    SlideOff,
 
 }
 public class Movement : MonoBehaviour
@@ -63,9 +64,10 @@ public class Movement : MonoBehaviour
     public float ExternalSpeedActor;
     public float _upwardForceActor;
     Coroutine _slideRoutine;
+    RaycastHit ray; 
+    RaycastHit midPointHit, frontPointHit;
 
 
-    
 
     // Start is called before the first frame update
     private void Awake()
@@ -274,7 +276,10 @@ public class Movement : MonoBehaviour
         }
 
     }
-
+    protected Vector3 AltGetSlopeMoveDir(RaycastHit slopeHit)
+    {
+        return Vector3.ProjectOnPlane(transform.forward, slopeHit.normal).normalized;
+    }
 
 
 
@@ -298,27 +303,33 @@ public class Movement : MonoBehaviour
             _currentState = States.GroundState;
         }
     }
-    void SlideStateConditions(){
+    void SlideStateConditions()
+    {
         HandleRotation(_slideTurnFactor);
         HandleGroundGravity();
-        _SlideDestination.x = transform.forward.x * _moveMentSpeed;  
-        _SlideDestination.y += _NormalGravity ;
+
+        Vector3 slideDirection = AltGetSlopeMoveDir(ray);
+        _SlideDestination.x = transform.forward.x * _moveMentSpeed;
+        _SlideDestination.y += _NormalGravity;
         _SlideDestination.z = transform.forward.z * _moveMentSpeed;
         _controller.Move(_SlideDestination * Time.fixedDeltaTime);
-        if (_JumpPress){
+        if (_JumpPress)
+        {
             _SlideDestination.y = 0;
             SlideColliderTrigger(_normalColliderHeight);
             _currentState = States.JumpState;
             StopForceSlide();
         }
-        if (!_isMoving){
+        if (!_isMoving)
+        {
             _SlideDestination.y = 0;
             _currentState = States.GroundState;
             SlideColliderTrigger(_normalColliderHeight);
             StopForceSlide();
         }
 
-        if (_moveMentSpeed < _slideStateCancelSpeed){
+        if (_moveMentSpeed < _slideStateCancelSpeed)
+        {
             _SlideDestination.y = 0;
             SlideColliderTrigger(_normalColliderHeight);
             _currentState = States.GroundState;
@@ -329,8 +340,12 @@ public class Movement : MonoBehaviour
     public void ExtennalSpeedEffctor(float speed) { 
         _moveMentSpeed += speed;
     }
+
+ 
     void FixedUpdate()
     {
+
+        
         InitializeJump();
         
         ImpDest.x = _MoveDestination.x * _moveMentSpeed;
@@ -356,20 +371,21 @@ public class Movement : MonoBehaviour
             JumpStateConditions();
             _controller.Move(ImpDest * Time.fixedDeltaTime);
         }
-        if (_currentState == States.GroundState)
+         if (_currentState == States.GroundState)
         {
             GroundStateConditions();
             _controller.Move(ImpDest * Time.fixedDeltaTime);
         }
-        if (_currentState == States.SlideState)
+         if (_currentState == States.SlideState)
         {
             SlideStateConditions();
 
         }
-        if (_currentState == States.LauchState)
+         if (_currentState == States.LauchState)
         {
 
         }
+      
         _userInterface.ChangeSpeedBar(_moveMentSpeed);
         _upwardForceActor = Mathf.Max(0, _upwardForceActor + _NormalGravity);
         _MoveDestination.y = Mathf.Max(-25, _MoveDestination.y);
@@ -435,6 +451,13 @@ public class Movement : MonoBehaviour
     {
         _inputActions.MOVES.Disable();
         _inputActions.UI.Disable();
+    }
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawRay(transform.position, Vector3.down * 1.8f*.9f);
+        Gizmos.DrawRay(transform.position, Vector3.down * 3);
+        Gizmos.DrawRay(transform.position + transform.forward, Vector3.down * 5);
     }
 }
 

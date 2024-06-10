@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Unity.Loading;
 using Unity.VisualScripting;
 using UnityEditor;
+using UnityEngine.Rendering;
 
 
 
@@ -168,7 +169,8 @@ public class PlatformScript : MonoBehaviour
     }
     private void OnDrawGizmos()
     {
-        Gizmos.color = Color.white;
+        Gizmos.color = Color.HSVToRGB(10,100,10);
+        
         
         /*if (BehaviourType == PlatformBehaviour.UpWardBlowers)
         {
