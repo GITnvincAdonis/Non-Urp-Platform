@@ -452,12 +452,6 @@ public class Movement : MonoBehaviour
         _inputActions.MOVES.Disable();
         _inputActions.UI.Disable();
     }
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawRay(transform.position, Vector3.down * 1.8f*.9f);
-        Gizmos.DrawRay(transform.position, Vector3.down * 3);
-        Gizmos.DrawRay(transform.position + transform.forward, Vector3.down * 5);
-    }
+    
 }
 

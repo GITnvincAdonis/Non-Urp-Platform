@@ -13,6 +13,7 @@ public class MainMenuScreen : MonoBehaviour
     {
         Paused,
         LevelScreen,
+        DeathScreen
         
     }
 
@@ -22,7 +23,7 @@ public class MainMenuScreen : MonoBehaviour
     [SerializeField] private LvlSwitchSO lvlEvents;
     VisualElement root;
     [SerializeField] private UIDocument _document;
-
+    [SerializeField] private Transform _position;
 
 
 
@@ -37,6 +38,15 @@ public class MainMenuScreen : MonoBehaviour
     [SerializeField] private Texture2D HealthIndicatorImg;
     [SerializeField] private Texture2D PanelsImg;
     [SerializeField] private Texture2D speedIcon;
+
+    [SerializeField] private Texture2D CollectableOne;
+    [SerializeField] private Texture2D CollectableTwo;
+    [SerializeField] private Texture2D CollectableThree;
+
+    Texture2D[] collectables = new Texture2D[3];
+
+
+
     [SerializeField] PauseManager pauseManager;
     Label InstructionContainer;
     VisualElement bar;
@@ -67,7 +77,12 @@ public class MainMenuScreen : MonoBehaviour
 
     private void Awake()
     {
-       
+        collectables[0] = CollectableOne;
+        collectables[1]= CollectableTwo;
+        collectables[2]= CollectableThree;
+
+
+
         optiontext[0] = "Return";
         optiontext[1] = "Restart";
         optiontext[2] = "Home";
@@ -99,6 +114,13 @@ public class MainMenuScreen : MonoBehaviour
             StartCoroutine(GenerateMenuUI());
 
         }
+        if(state == MenuState.LevelScreen)
+        {
+            Vector3 screen = Camera.main.WorldToScreenPoint(_position.position);
+            speedbar.style.left = screen.x + (speedbar.layout.width/2)-400;
+            speedbar.style.top = (Screen.height - screen.y) - 300;
+
+        }
         
        
         
@@ -127,8 +149,10 @@ public class MainMenuScreen : MonoBehaviour
         InstructionContainer.AddToClassList("instruct-container");
         InstructionContainer.Insert(0, createElement("instruction-image"));
         for (int i = 0; i < containers.Length; i++) {
+            VisualElement rendText = new();
+            
             containers[i] = createElement("container", "container-"+i);
-            AddImage(containers[i], PanelsImg);
+            AddImage(containers[i], PanelsImg); 
             root.Add(containers[i]);
         }
         bar = createElement("outer-bar");
@@ -184,19 +208,37 @@ public class MainMenuScreen : MonoBehaviour
     }
     private void ChangeBoxOne(Texture2D src)
     {
-        containers[0].style.backgroundImage = src;
+        VisualElement image = new();
+        image.style.backgroundImage = src;
+        image.style.width = 140;
+        image.style.height = 140;
+        containers[0].Insert(0, image);
     }
     private void ChangeBoxTwo(Texture2D scr)
     {
-        containers[1].style.backgroundImage = scr;
+        VisualElement image = new();
+        image.style.backgroundImage = scr;
+        image.style.width = 140;
+        image.style.height = 140;
+        containers[1].Insert(0, image);
     }
     private void ChangeBoxThree(Texture2D scr)
     {
-        containers[2].style.backgroundImage = scr;
+       
+        VisualElement image = new();
+        image.style.backgroundImage = scr;
+        image.style.width = 140;
+        image.style.height = 140;
+        containers[2].Insert(0, image);
     }
     private void ChangeBoxFour(Texture2D scr)
     {
-        containers[3].style.backgroundImage = scr;
+        VisualElement image = new();
+        image.style.backgroundImage = scr;
+        image.style.width = 100;
+        image.style.height = 100;   
+        containers[3].Insert(0,image);
+        
     }
     private void AppendInstructions(string text)
     {

@@ -5,6 +5,7 @@ using UnityEngine;
 public class TriggerInteractText : MonoBehaviour
 {
     [SerializeField] UserInterfaceSO UserInterfaceSO;
+    [SerializeField] string InstructionString;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,7 +19,7 @@ public class TriggerInteractText : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        UserInterfaceSO.AddTextEventRaiser("Platform increases your speed.Be careful, the place is slipery");
+        UserInterfaceSO.AddTextEventRaiser(InstructionString);
         
         
     }

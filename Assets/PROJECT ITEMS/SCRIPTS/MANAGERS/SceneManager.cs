@@ -7,7 +7,9 @@ using UnityEngine.SceneManagement;
 public class SceneManagerLocal : MonoBehaviour
 {
     public static SceneManagerLocal script;
+
     public LvlSwitchSO sceneSwitcher;
+    public WinConditionSO winSO;
     string currentLevel;
 
     [SerializeField] UserInterfaceSO UIevents;
@@ -30,11 +32,29 @@ public class SceneManagerLocal : MonoBehaviour
     
     void OnEnable()
     {
+        winSO.LoseEvent.AddListener(LoseState);
+        winSO.WinEvent.AddListener(WinState);
         sceneSwitcher.switchedEvent.AddListener(retrieveLvlToSwitch);
     }
     void OnDisable()
     {
+        winSO.LoseEvent.RemoveListener(LoseState);
+        winSO.WinEvent.RemoveListener(WinState);
         sceneSwitcher.switchedEvent.RemoveListener(retrieveLvlToSwitch);
+    }
+
+    public async void WinState()
+    {
+
+    }
+    public async void LoseState()
+    {
+        UIevents.FadeInEventRaiser();
+        await Task.Delay(1000);
+        //SceneManager.UnloadSceneAsync(currentLevel);
+        var scene = SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex);
+        await Task.Delay(3000);
+        UIevents.FadeOutEventRaiser();
     }
     public async void retrieveLvlToSwitch(string name)
     {

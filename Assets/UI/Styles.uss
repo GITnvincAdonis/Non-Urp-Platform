@@ -2,11 +2,13 @@
  :root{
 
 	transition-duration: 200ms;
-
+	border-color: black;
+	border-width: 3px;
 	display: flex;
+	
 	flex-direction: row;
-	justify-content: center;
-	align-items: flex-end;
+	justify-content: flex-start;
+	align-items: flex-start;
 	
 	
 	
@@ -15,18 +17,18 @@
 	background-color: black;
 }
 .instruct-container{
+	position: absolute;
 	transition-duration: 100ms;
 	transition-delay: 40ms;
 	transition-timing-function: ease-in;
+	
 
-
-	position: absolute;
-	display: flex;
-	align-items: flex-end; 
+	
+	
 	
 
 	-unity-text-align: upper-center;
-	margin: 0 0 0 5%;
+	margin: 0 0 0 0%;
 	
 	
 	height: 15%;
@@ -35,7 +37,7 @@
 	
 	bottom:28%;
 	white-space: normal;
-	width:50%;
+	width:100%;
 	opacity:0;
 	
 	
@@ -43,7 +45,9 @@
 .in-view{
 	
 	opacity: .8;
-	font-size: 15px;	
+	font-size: 25px;
+	
+	
 }
 .instruction-image{
 	border-color: black;
@@ -52,12 +56,12 @@
 	height:30px;
 	width: 160px;
 	
-	margin-top: 20px;	
+	margin-top: 26px;	
 	
 }
 .container
 {
-	margin: 40px 5px 40px 5px;
+	margin:290px 5px 40px 9px;
 
 	border-width: 3px;
 	background-overflow: ellipsis;
@@ -66,25 +70,26 @@
 	height: 140px;
 	width: 140px;
 	background-size: 300px 200px;
-
+	scale:.6;
 }
 .container-0{
 	
-	translate: -100px -100px;
+	translate: 70px -130px;
 	
 
 }
 .container-1{
 	
-	translate: -180px 0%;
+	translate: -60px -70px;
 }
 .container-2{
 	
-	translate:180px 0%;
+	translate:-170px -110px;
 }
 .container-3{
 	
-	translate:100px -100px
+	translate:100px -100px;
+	opacity: 0;
 }
 .outer-bar{
 	position: absolute;
@@ -95,7 +100,7 @@
 	margin: 4% 0 0 4%;
 	width: 240px;
 	display:flex;
-	scale:1.1;
+	scale:.7;
 	
 	height: 170px;
 	
