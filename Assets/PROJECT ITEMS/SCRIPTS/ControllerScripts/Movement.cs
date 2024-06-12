@@ -386,7 +386,7 @@ public class Movement : MonoBehaviour
 
         }
       
-        _userInterface.ChangeSpeedBar(_moveMentSpeed);
+        _userInterface.ChangeSpeedBar(_moveMentSpeed, transform.position.x, transform.position.y, transform.position.z);
         _upwardForceActor = Mathf.Max(0, _upwardForceActor + _NormalGravity);
         _MoveDestination.y = Mathf.Max(-25, _MoveDestination.y);
 

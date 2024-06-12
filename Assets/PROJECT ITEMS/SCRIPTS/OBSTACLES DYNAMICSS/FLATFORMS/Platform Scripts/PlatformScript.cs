@@ -49,6 +49,8 @@ public class PlatformScript : MonoBehaviour
     [SerializeField] private Transform DirectionSource;
 
     private Vector3 initialPos;
+
+    List<Tween> tweens = new ();
     // Start is called before the first frame update
     private void Awake()
     {
@@ -71,7 +73,7 @@ public class PlatformScript : MonoBehaviour
             Vector3 rotationDestination = Vector3.zero;
             rotationDestination.x = 360f;
 
-            transform.DORotate(rotationDestination, RotationDuration, RotateMode.FastBeyond360).SetLoops(-1).SetEase(Ease.Linear);
+            tweens.Add(transform.DORotate(rotationDestination, RotationDuration, RotateMode.FastBeyond360).SetLoops(-1).SetEase(Ease.Linear));
 
         }
         if (BehaviourType == PlatformBehaviour.rotatingY)
@@ -79,7 +81,7 @@ public class PlatformScript : MonoBehaviour
             Vector3 rotationDestination = Vector3.zero;
             rotationDestination.y = 360f;
 
-            transform.DORotate(rotationDestination, RotationDuration, RotateMode.FastBeyond360).SetLoops(-1).SetEase(Ease.Linear);
+            tweens.Add(transform.DORotate(rotationDestination, RotationDuration, RotateMode.FastBeyond360).SetLoops(-1).SetEase(Ease.Linear));
 
         }
         if (BehaviourType == PlatformBehaviour.rotatingZ)
@@ -87,7 +89,7 @@ public class PlatformScript : MonoBehaviour
             Vector3 rotationDestination = Vector3.zero;
             rotationDestination.z = 360f;
 
-            transform.DORotate(rotationDestination, RotationDuration, RotateMode.FastBeyond360).SetLoops(-1).SetEase(Ease.Linear);
+            tweens.Add(transform.DORotate(rotationDestination, RotationDuration, RotateMode.FastBeyond360).SetLoops(-1).SetEase(Ease.Linear));
 
         }
     }
@@ -97,7 +99,7 @@ public class PlatformScript : MonoBehaviour
         Vector3 Destination = currentPosition + Displacement;
         if (BehaviourType == PlatformBehaviour.LineMove)
         {
-            transform.DOMove(Destination,DisplacementDuration).SetLoops(-1, LoopType.Yoyo).SetEase(Ease.Linear);
+            tweens.Add(transform.DOMove(Destination,DisplacementDuration).SetLoops(-1, LoopType.Yoyo).SetEase(Ease.Linear));
         }
     }
     void OneWayLogic()
@@ -126,7 +128,7 @@ public class PlatformScript : MonoBehaviour
             //transform.DOMove(Destination,DisplacementDuration).SetLoops(-1, LoopType.Yoyo).SetEase(Ease.Linear);
             //transform.DOBlendableMoveBy(new Vector3(1,3,5), 10).SetLoops(-1, LoopType.Yoyo);
 
-            transform.DOLocalPath(points, SwingSpeed, PathType.CubicBezier).SetLoops(-1, LoopType.Yoyo).SetEase(Ease.InOutCubic); 
+            tweens.Add(transform.DOLocalPath(points, SwingSpeed, PathType.CubicBezier).SetLoops(-1, LoopType.Yoyo).SetEase(Ease.InOutCubic)); 
         }
     }
     private void OnTriggerEnter(Collider other)
@@ -189,6 +191,12 @@ public class PlatformScript : MonoBehaviour
             
         }
     }
-    
+    private void OnDestroy()
+    {
+        foreach (Tween t in tweens) {
+            t.Kill();
+        }
+    }
+
 
 }

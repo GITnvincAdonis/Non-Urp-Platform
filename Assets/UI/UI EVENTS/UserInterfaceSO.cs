@@ -15,7 +15,7 @@ public class UserInterfaceSO : ScriptableObject
 
 
     public UnityEvent<int> UpdateHealthBarEvent;
-    public UnityEvent<float> UpdateSpeedEvent;
+    public UnityEvent<float, float, float , float > UpdateSpeedEvent;
     public UnityEvent<Texture2D> UpdateContainerEvent1;
     public UnityEvent<Texture2D> UpdateContainerEvent2; 
     public UnityEvent<Texture2D> UpdateContainerEvent3;
@@ -23,6 +23,7 @@ public class UserInterfaceSO : ScriptableObject
 
     public int healthAmount;
     public float speedValue;
+    public float[] position = new float[3];
     public Texture2D containerOneImg;
     public Texture2D containerTwoImg;
     public Texture2D containerThreeImg;
@@ -41,7 +42,7 @@ public class UserInterfaceSO : ScriptableObject
         if (InstructionEvent == null) InstructionEvent = new UnityEvent<string>();
         if (ExitEvent == null) ExitEvent = new UnityEvent();
         if (UpdateHealthBarEvent == null) UpdateHealthBarEvent = new UnityEvent<int>();
-        if (UpdateSpeedEvent == null) UpdateSpeedEvent = new UnityEvent<float>();
+        if (UpdateSpeedEvent == null) UpdateSpeedEvent = new UnityEvent<float, float, float, float>();
         if (UpdateContainerEvent1 == null) UpdateContainerEvent1 = new UnityEvent<Texture2D>();
         if (UpdateContainerEvent2 == null) UpdateContainerEvent2 = new UnityEvent<Texture2D>();
         if (UpdateContainerEvent3 == null) UpdateContainerEvent3 = new UnityEvent<Texture2D>();
@@ -81,9 +82,13 @@ public class UserInterfaceSO : ScriptableObject
         healthAmount = health;
         UpdateHealthBarEvent.Invoke(healthAmount);
     }
-    public void ChangeSpeedBar(float speed) { 
+    public void ChangeSpeedBar(float speed, float x, float y, float z) {
+        position[0] = x;
+        position[1] = y;
+        position[2] = z;
+
         speedValue = speed;
-        UpdateSpeedEvent.Invoke(speedValue);
+        UpdateSpeedEvent.Invoke(speedValue, position[0], position[1], position[2]);
     }
     public void ChangeContOneEventRaiser(Texture2D text)
     {

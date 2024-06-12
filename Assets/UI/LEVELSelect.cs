@@ -53,29 +53,42 @@ public class LEVELSelect : MonoBehaviour
             text.AddToClassList("text-" + (i + 1));
 
             levelContainers[i] = createElement("levels", "level-" + i);
-            levelContainers[i].RegisterCallback<ClickEvent>(ClickEvent);
+            
 
             levelContainers[i].Insert(0, text);
             levelContainer.Insert(0, levelContainers[i]);
 
         }
+        levelContainers[0].RegisterCallback<ClickEvent>((ClickEvent) => {clickEvent(0);});
+        levelContainers[1].RegisterCallback<ClickEvent>((ClickEvent) => {clickEvent(1);});
+        levelContainers[2].RegisterCallback<ClickEvent>((ClickEvent) => {clickEvent(2);});
+        levelContainers[3].RegisterCallback<ClickEvent>((ClickEvent) => {clickEvent(3);});
+        levelContainers[4].RegisterCallback<ClickEvent>((ClickEvent) => {clickEvent(4);});
 
         root.Add(levelContainer);
-
         delay();
 
     }
-    void ClickEvent(ClickEvent evt)
+    void clickEvent(int i)
     {
-        MyDelay();
+
+        MyDelay(i);
         Debug.Log("Clicked");
     }
-    async Task MyDelay()
+    async Task MyDelay(int i)
     {
 
         if (Lvl != lvlEvents.gameSceneToSwitchTo) UIEvents.FadeInEventRaiser();
         await Task.Delay(1000);
-        lvlEvents.LevelOneEventRaiser();
+
+
+        
+        if (i==0) lvlEvents.RoomEventRaiser();
+        if (i== 1) lvlEvents.LevelOneEventRaiser();
+        if (i==2) lvlEvents.LevelOneEventRaiser();
+        if (i==3) lvlEvents.LevelOneEventRaiser();
+        //else lvlEvents.LevelOneEventRaiser();
+        
     }
     async Task delay()
     {

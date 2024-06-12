@@ -237,10 +237,14 @@ MonoBehaviour:
   UIEvents: {fileID: 11400000, guid: 113ec21d6d45c1a47968105ace5a7f58, type: 2}
   lvlEvents: {fileID: 11400000, guid: bf9c231ff68e53a4ea9587d8181c99d5, type: 2}
   _document: {fileID: 91320198}
+  _position: {fileID: 1959222327}
   _playingStyles: {fileID: 7433441132597879392, guid: 115b0035b8784c944b159c76f6b22ab5, type: 3}
   HealthIndicatorImg: {fileID: 2800000, guid: ac559a8cde4e71c4d9895ffec86a0e28, type: 3}
   PanelsImg: {fileID: 2800000, guid: d252b13679d0b1849bed616b86329fd7, type: 3}
   speedIcon: {fileID: 2800000, guid: 488faced96de9a3408f9b441cf70d947, type: 3}
+  CollectableOne: {fileID: 0}
+  CollectableTwo: {fileID: 0}
+  CollectableThree: {fileID: 0}
   pauseManager: {fileID: 95433472}
   _pauseMenuStyles: {fileID: 7433441132597879392, guid: 2e1701713f791ad4f89e4c9c9cb26ee6, type: 3}
 --- !u!114 &91320198
@@ -2419,6 +2423,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneSwitcher: {fileID: 11400000, guid: bf9c231ff68e53a4ea9587d8181c99d5, type: 2}
+  winSO: {fileID: 11400000, guid: e7cd41629ff275441b02b86f74e48e2e, type: 2}
   UIevents: {fileID: 11400000, guid: 113ec21d6d45c1a47968105ace5a7f58, type: 2}
 --- !u!4 &710162317
 Transform:
@@ -5284,7 +5289,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1286524293}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.13413174, y: 0.000000003917098, z: -5.301989e-10, w: 0.9909635}
+  m_LocalRotation: {x: 0.13413173, y: -0.000000025874554, z: 0.0000000035022467, w: 0.9909635}
   m_LocalPosition: {x: 9.35, y: 12.32, z: -18.51}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0

@@ -47,13 +47,22 @@ public class SceneManagerLocal : MonoBehaviour
     {
 
     }
+    AsyncOperation scene;
+    
     public async void LoseState()
     {
         UIevents.FadeInEventRaiser();
         await Task.Delay(1000);
         //SceneManager.UnloadSceneAsync(currentLevel);
-        var scene = SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex);
-        await Task.Delay(3000);
+        scene = SceneManager.LoadSceneAsync("Room", LoadSceneMode.Single);
+                
+        
+        while (!scene.isDone)
+        {
+            await Task.Yield();
+        }
+
+        await Task.Delay(1000);
         UIevents.FadeOutEventRaiser();
     }
     public async void retrieveLvlToSwitch(string name)

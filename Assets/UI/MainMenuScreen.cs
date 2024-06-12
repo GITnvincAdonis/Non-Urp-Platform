@@ -23,7 +23,7 @@ public class MainMenuScreen : MonoBehaviour
     [SerializeField] private LvlSwitchSO lvlEvents;
     VisualElement root;
     [SerializeField] private UIDocument _document;
-    [SerializeField] private Transform _position;
+   
 
 
 
@@ -65,14 +65,14 @@ public class MainMenuScreen : MonoBehaviour
     string[] optiontext = new string[5];
     VisualElement item;
 
-
+    Vector3 PlayerPos;
 
 
 
 
     //MenuSelect UI references
 
-    
+
 
 
     private void Awake()
@@ -94,7 +94,7 @@ public class MainMenuScreen : MonoBehaviour
     {
         
         StartCoroutine(GeneratePlayingUI());
-        FadeFromBlack();
+        
     }
     private void Update()
     {
@@ -116,7 +116,7 @@ public class MainMenuScreen : MonoBehaviour
         }
         if(state == MenuState.LevelScreen)
         {
-            Vector3 screen = Camera.main.WorldToScreenPoint(_position.position);
+            Vector3 screen = Camera.main.WorldToScreenPoint(PlayerPos);
             speedbar.style.left = screen.x + (speedbar.layout.width/2)-400;
             speedbar.style.top = (Screen.height - screen.y) - 300;
 
@@ -202,8 +202,11 @@ public class MainMenuScreen : MonoBehaviour
             innerBar.AddToClassList("inner-bar-3");
         }
     }
-    private void ChangeSpeed(float value)
+    private void ChangeSpeed(float value, float x, float y, float z)
     {
+        PlayerPos.x = x;
+        PlayerPos.y = y;
+        PlayerPos.z = z;
         speedbar.style.width = (value + 10) * 3;
     }
     private void ChangeBoxOne(Texture2D src)
@@ -282,7 +285,7 @@ public class MainMenuScreen : MonoBehaviour
             text.AddToClassList("text");
             text.text = optiontext[i];
             optionContainers[i].Insert(0, text);
-            optionContainers[i].RegisterCallback<ClickEvent>(pauseMenuClickEvent);
+            optionContainers[i].RegisterCallback<ClickEvent>(MenuClickEvent);
             optionMegaContainer.Insert(0,optionContainers[i]);
 
         }
@@ -292,7 +295,7 @@ public class MainMenuScreen : MonoBehaviour
         root.Add(item);
     }
 
-    void pauseMenuClickEvent(ClickEvent evt)
+    void MenuClickEvent(ClickEvent evt)
     {
         MyDelay();
         Debug.Log("clicked");
@@ -302,6 +305,7 @@ public class MainMenuScreen : MonoBehaviour
 
         if (Lvl != lvlEvents.gameSceneToSwitchTo) UIEvents.FadeInEventRaiser();
         await Task.Delay(1000);
+        Debug.Log("left");
         lvlEvents.MenuSelectEventRaiser();
     }
 
