@@ -24,6 +24,7 @@ public class Movement : MonoBehaviour
     public List<CannonController> CANNONS = new List<CannonController>();
     Dictionary<CannonController, float> CANNONSAndTime = new Dictionary<CannonController, float>();
     public CharacterController _controller;
+    [SerializeField] Animator _animator;
 
     [SerializeField] PauseManager _pauseManager;
 
@@ -105,6 +106,9 @@ public class Movement : MonoBehaviour
         _inputActions.UI.Unpause.started += UnpauseEnabled;
         _inputActions.UI.Unpause.performed += UnpauseEnabled;
         _inputActions.UI.Unpause.canceled += UnpauseEnabled;
+
+
+       
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
 
@@ -139,10 +143,12 @@ public class Movement : MonoBehaviour
         if (directionDestinations.x == 0 && directionDestinations.y == 0)
         {
             _isMoving = false;
+            _animator.SetBool("IsMoving", false);
         }
         else
         {
             _isMoving = true;
+            _animator.SetBool("IsMoving", true);
         }       
     }
     void jumpActivated(InputAction.CallbackContext context)
@@ -243,6 +249,7 @@ public class Movement : MonoBehaviour
     void handleJump(){
 
         if (_JumpPress && _controller.isGrounded){
+            _animator.SetTrigger("JumpTrigger");
             _MoveDestination.y = _initialVelocity;
             _JumpCount++;
         }
@@ -293,6 +300,14 @@ public class Movement : MonoBehaviour
            // Debug.Log("grounded, jumping");
             _currentState = States.JumpState;
         }
+        if (!_controller.isGrounded)
+        {
+
+            _animator.SetBool("IsFallingDown", true);
+        }
+        if (_controller.isGrounded) {
+            _animator.SetBool("IsFallingDown", false);
+        }
     }
 
     void JumpStateConditions(){
@@ -302,6 +317,8 @@ public class Movement : MonoBehaviour
             //Debug.Log("grounded here");
             _currentState = States.GroundState;
         }
+        
+        
     }
     void SlideStateConditions()
     {
@@ -315,6 +332,7 @@ public class Movement : MonoBehaviour
         _controller.Move(_SlideDestination * Time.fixedDeltaTime);
         if (_JumpPress)
         {
+            _animator.SetTrigger("JumpTrigger");
             _SlideDestination.y = 0;
             SlideColliderTrigger(_normalColliderHeight);
             _currentState = States.JumpState;
@@ -344,8 +362,10 @@ public class Movement : MonoBehaviour
  
     void FixedUpdate()
     {
-
-        
+        float blendFactor = Mathf.Clamp((_moveMentSpeed), 0.0f, 15f);
+        //Debug.Log(blendFactor);
+        _animator.SetFloat("Blend", blendFactor);
+        _animator.SetBool("IsGrounded", _controller.isGrounded);
         InitializeJump();
         
         ImpDest.x = _MoveDestination.x * _moveMentSpeed;
