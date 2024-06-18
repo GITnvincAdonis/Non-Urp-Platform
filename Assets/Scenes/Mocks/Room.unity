@@ -139,7 +139,7 @@ GameObject:
   - component: {fileID: 46976758}
   - component: {fileID: 46976757}
   - component: {fileID: 46976756}
-  m_Layer: 8
+  m_Layer: 2
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -216,6 +216,7 @@ MonoBehaviour:
   _slideStateCancelSpeed: 7
   ExternalSpeedActor: 0
   _upwardForceActor: 0
+  _CannonMoveRelay: {fileID: 11400000, guid: 727659d4ba54ad34f90404b88a91f598, type: 2}
 --- !u!143 &46976758
 CharacterController:
   m_ObjectHideFlags: 0
@@ -239,7 +240,7 @@ CharacterController:
   m_Radius: 0.74
   m_SlopeLimit: 10
   m_StepOffset: 0.5
-  m_SkinWidth: 0.002
+  m_SkinWidth: 0.06
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0.08, z: 0}
 --- !u!54 &46976759
@@ -261,13 +262,13 @@ Rigidbody:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 68
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 0
   m_IsKinematic: 1
   m_Interpolate: 1
-  m_Constraints: 0
+  m_Constraints: 32
   m_CollisionDetection: 1
 --- !u!65 &46976760
 BoxCollider:
@@ -845,7 +846,7 @@ GameObject:
   - component: {fileID: 130455369}
   - component: {fileID: 130455368}
   - component: {fileID: 130455367}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Fan (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1439,7 +1440,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 322741657}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.13413174, y: 0.00000001705089, z: -0.0000000023079212, w: 0.9909635}
+  m_LocalRotation: {x: 0.13413174, y: -0.0000000170509, z: 0.0000000023079227, w: 0.9909635}
   m_LocalPosition: {x: 9.35, y: 12.32, z: -18.51}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1516,7 +1517,7 @@ BoxCollider:
     m_Bits: 64
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 55
+    m_Bits: 51
   m_LayerOverridePriority: 0
   m_IsTrigger: 1
   m_ProvidesContacts: 1
@@ -12969,7 +12970,7 @@ BoxCollider:
     m_Bits: 64
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 55
+    m_Bits: 51
   m_LayerOverridePriority: 0
   m_IsTrigger: 1
   m_ProvidesContacts: 1
@@ -13653,6 +13654,128 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!1 &732794114
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 732794115}
+  - component: {fileID: 732794119}
+  - component: {fileID: 732794118}
+  - component: {fileID: 732794117}
+  - component: {fileID: 732794116}
+  m_Layer: 8
+  m_Name: CANON (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &732794115
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 732794114}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -18.2, y: 48.4, z: -77.4}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1907250141}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &732794116
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 732794114}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d3f90e8b5825c82408c0ef7eca75dbfb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotationStep: 6
+  _Angle: 60
+  _InitialVelocity: 10
+  _moveRelay: {fileID: 11400000, guid: 727659d4ba54ad34f90404b88a91f598, type: 2}
+--- !u!65 &732794117
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 732794114}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!23 &732794118
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 732794114}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 4b905f60df09c8245b6e0d5af2e04c7f, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &732794119
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 732794114}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &765682051
 GameObject:
   m_ObjectHideFlags: 0
@@ -18694,7 +18817,7 @@ GameObject:
   - component: {fileID: 864643314}
   - component: {fileID: 864643313}
   - component: {fileID: 864643312}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cube (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -18918,7 +19041,7 @@ GameObject:
   - component: {fileID: 873428814}
   - component: {fileID: 873428813}
   - component: {fileID: 873428812}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cube (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -25757,6 +25880,10 @@ PrefabInstance:
     - target: {fileID: 6910824615624397270, guid: 17ea61321e730f14e8a2c17031a28989, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7267373444794387189, guid: 17ea61321e730f14e8a2c17031a28989, type: 3}
+      propertyPath: m_ExcludeLayers.m_Bits
+      value: 691
       objectReference: {fileID: 0}
     - target: {fileID: 7708000902768456266, guid: 17ea61321e730f14e8a2c17031a28989, type: 3}
       propertyPath: m_Name
@@ -33829,6 +33956,8 @@ GameObject:
   - component: {fileID: 1626119083}
   - component: {fileID: 1626119082}
   - component: {fileID: 1626119081}
+  - component: {fileID: 1626119085}
+  - component: {fileID: 1626119084}
   m_Layer: 6
   m_Name: Cube
   m_TagString: Untagged
@@ -33922,6 +34051,40 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1626119079}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!65 &1626119084
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1626119079}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1626119085
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1626119079}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6c11cae45c55994e87960752cf3cab8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 1990684541}
 --- !u!1 &1629147084
 GameObject:
   m_ObjectHideFlags: 0
@@ -33936,7 +34099,7 @@ GameObject:
   - component: {fileID: 1629147087}
   - component: {fileID: 1629147086}
   - component: {fileID: 1629147085}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Fan
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -35038,7 +35201,7 @@ GameObject:
   - component: {fileID: 1802183089}
   - component: {fileID: 1802183088}
   - component: {fileID: 1802183087}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Plane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -35722,6 +35885,7 @@ Transform:
   - {fileID: 1940029652}
   - {fileID: 1146404715}
   - {fileID: 3802119891573234383}
+  - {fileID: 732794115}
   - {fileID: 543450653265410795}
   - {fileID: 543450652605579468}
   - {fileID: 543450651810586830}
@@ -35748,7 +35912,7 @@ GameObject:
   - component: {fileID: 1911499360}
   - component: {fileID: 1911499358}
   - component: {fileID: 1911499359}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: CAM STATE MANAGER
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -36539,7 +36703,7 @@ GameObject:
   - component: {fileID: 1963518900}
   - component: {fileID: 1963518899}
   - component: {fileID: 1963518898}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Plane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -38146,7 +38310,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 543450652811785327}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: wall fan
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -38162,7 +38326,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 543450652861066969}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: wall fan
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -38497,7 +38661,7 @@ GameObject:
   - component: {fileID: 3090659761093639854}
   - component: {fileID: 4027627708096553192}
   - component: {fileID: 3005376280788425193}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: CANON
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -38581,7 +38745,7 @@ GameObject:
   - component: {fileID: 3316992658106336296}
   - component: {fileID: 9203870080202452863}
   - component: {fileID: 7783642028924292991}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cylinder.002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -38599,7 +38763,7 @@ GameObject:
   - component: {fileID: 3316992658029797022}
   - component: {fileID: 9203870080249640393}
   - component: {fileID: 7783642029005034953}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cylinder.002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -38627,6 +38791,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationStep: 2.5
+  _Angle: 0
+  _InitialVelocity: 0
+  _moveRelay: {fileID: 0}
 --- !u!33 &3010172807277163216
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -38922,7 +39089,7 @@ GameObject:
   - component: {fileID: 6645823805405434627}
   - component: {fileID: 5366159435586335095}
   - component: {fileID: 7202271454948245485}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cylinder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -38940,7 +39107,7 @@ GameObject:
   - component: {fileID: 6645823805463103925}
   - component: {fileID: 5366159435537050561}
   - component: {fileID: 7202271455035270491}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cylinder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -40285,7 +40452,7 @@ GameObject:
   - component: {fileID: 4418473097834470514}
   - component: {fileID: 215592838245060045}
   - component: {fileID: 1558643249227907615}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cube.009
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -40303,7 +40470,7 @@ GameObject:
   - component: {fileID: 4418473097791473348}
   - component: {fileID: 215592838296442747}
   - component: {fileID: 1558643249277196457}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cube.009
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -41100,7 +41267,7 @@ GameObject:
   - component: {fileID: 6738450967813807075}
   - component: {fileID: 4109396432049199395}
   - component: {fileID: 7071182760721998216}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cylinder.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -41118,7 +41285,7 @@ GameObject:
   - component: {fileID: 6738450967892443477}
   - component: {fileID: 4109396431972647829}
   - component: {fileID: 7071182760806939454}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cylinder.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -41271,7 +41438,7 @@ GameObject:
   - component: {fileID: 5197901907326077377}
   - component: {fileID: 4582700386548947064}
   - component: {fileID: 7232403712761242957}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Torus
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -41289,7 +41456,7 @@ GameObject:
   - component: {fileID: 5197901907369071479}
   - component: {fileID: 4582700386497561294}
   - component: {fileID: 7232403712808435707}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Torus
   m_TagString: Untagged
   m_Icon: {fileID: 0}

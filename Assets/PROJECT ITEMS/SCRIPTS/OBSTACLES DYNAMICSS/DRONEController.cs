@@ -140,10 +140,14 @@ public class DRONEController : MonoBehaviour
     }
     private void OnTriggerExit(Collider other)
     {
-        if (_currentState == DroneState.Attack){
-            _currentState = DroneState.idle;
-            _playerDestination = Vector3.zero;
+        if (LayerMask.LayerToName(other.gameObject.layer) == "PlayerWIreframe")
+        {
+            if (_currentState == DroneState.Attack){
+                _currentState = DroneState.idle;
+                _playerDestination = Vector3.zero;
+            }
+            Debug.Log("we out");
+
         }
-        Debug.Log("we out");
     }
 }

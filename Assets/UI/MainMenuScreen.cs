@@ -128,14 +128,14 @@ public class MainMenuScreen : MonoBehaviour
     private void OnValidate()
     {
         StartCoroutine(GenerateMenuUI());
-        Debug.Log("changed");
+        //Debug.Log("changed");
     }
 
 
     private IEnumerator GeneratePlayingUI()
     {
         
-        Debug.Log("player");
+        //Debug.Log("player");
         yield return null;
         root = _document.rootVisualElement;
         root.Clear();
@@ -269,7 +269,7 @@ public class MainMenuScreen : MonoBehaviour
 
     private IEnumerator GenerateMenuUI()
     {
-        Debug.Log("menu");
+        //Debug.Log("menu");
         yield return null;
         root = _document.rootVisualElement;
         root.Clear();

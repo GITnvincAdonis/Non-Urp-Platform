@@ -14,6 +14,7 @@ enum States
     fallingState,
     SlideState,
     LauchState,
+    LauchingState,
     SlideOff,
 
 }
@@ -68,6 +69,8 @@ public class Movement : MonoBehaviour
     RaycastHit ray; 
     RaycastHit midPointHit, frontPointHit;
 
+    [SerializeField] CannonMoveRelay _CannonMoveRelay;
+
 
 
     // Start is called before the first frame update
@@ -121,7 +124,7 @@ public class Movement : MonoBehaviour
     {
         
         _inputActions.MOVES.Disable();
-            _inputActions.UI.Enable();
+        _inputActions.UI.Enable();
         Cursor.visible = true;
 
 
@@ -155,7 +158,11 @@ public class Movement : MonoBehaviour
     {
         bool jumpStat = context.ReadValueAsButton();
         _JumpPress = jumpStat;
-        handleJump();
+        if(_currentState != States.LauchState) handleJump();
+        if(_currentState == States.LauchState)
+        {
+            _currentState = States.LauchingState;
+        }
     }
     void SlideActiviated(InputAction.CallbackContext context)
     {
@@ -165,6 +172,7 @@ public class Movement : MonoBehaviour
         if (state && (_currentState == States.GroundState))
         {  
             _currentState = States.SlideState;
+            _animator.SetTrigger("SlideTrigger");
             StartForceSlide();
             SlideColliderTrigger(_slideColliderHeight);
         }
@@ -333,6 +341,7 @@ public class Movement : MonoBehaviour
         if (_JumpPress)
         {
             _animator.SetTrigger("JumpTrigger");
+            
             _SlideDestination.y = 0;
             SlideColliderTrigger(_normalColliderHeight);
             _currentState = States.JumpState;
@@ -340,6 +349,7 @@ public class Movement : MonoBehaviour
         }
         if (!_isMoving)
         {
+            
             _SlideDestination.y = 0;
             _currentState = States.GroundState;
             SlideColliderTrigger(_normalColliderHeight);
@@ -348,13 +358,17 @@ public class Movement : MonoBehaviour
 
         if (_moveMentSpeed < _slideStateCancelSpeed)
         {
+            
             _SlideDestination.y = 0;
             SlideColliderTrigger(_normalColliderHeight);
             _currentState = States.GroundState;
         }
 
     }
-
+    void LaunchingStateConditions()
+    {
+        Debug.Log("flying");
+    }
     public void ExtennalSpeedEffctor(float speed) { 
         _moveMentSpeed += speed;
     }
@@ -371,6 +385,7 @@ public class Movement : MonoBehaviour
         ImpDest.x = _MoveDestination.x * _moveMentSpeed;
         ImpDest.y = _MoveDestination.y + _upwardForceActor;
         ImpDest.z = _MoveDestination.z * _moveMentSpeed;
+
 
 
         if (_isMoving)
@@ -398,12 +413,18 @@ public class Movement : MonoBehaviour
         }
          if (_currentState == States.SlideState)
         {
+            _animator.SetBool("IsSliding", true);
             SlideStateConditions();
 
         }
-         if (_currentState == States.LauchState)
+        else
+        {
+            _animator.SetBool("IsSliding", false);
+        }
+         if (_currentState == States.LauchingState)
         {
 
+            LaunchingStateConditions();
         }
       
         _userInterface.ChangeSpeedBar(_moveMentSpeed, transform.position.x, transform.position.y, transform.position.z);
@@ -425,7 +446,10 @@ public class Movement : MonoBehaviour
             Debug.Log("bouncy touch");
             _MoveDestination.y = _initialVelocity * 2;
             ToggleJumpState();
-        } 
+        }
+        if (_currentState == States.LauchingState) { 
+            _currentState = States.GroundState;
+        }
     }
     
     async void ToggleJumpState()
@@ -462,13 +486,20 @@ public class Movement : MonoBehaviour
         //Debug.Log("left trigger");
     }
 
+
+    void AcceptCannonPathCoord(float[] coords)
+    {
+        if(_currentState == States.LauchingState) _controller.Move(new Vector3(coords[0], coords[1], coords[2])* Time.fixedDeltaTime * 11);
+    }
     private void OnEnable()
     {
+        _CannonMoveRelay.CannonPathCoords.AddListener(AcceptCannonPathCoord);
         _inputActions.MOVES.Enable();
         _inputActions.UI.Enable();
     }
     private void OnDisable()
     {
+        _CannonMoveRelay.CannonPathCoords.RemoveListener(AcceptCannonPathCoord);
         _inputActions.MOVES.Disable();
         _inputActions.UI.Disable();
     }

@@ -35,6 +35,15 @@ public partial class @CANNON: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Release"",
+                    ""type"": ""Button"",
+                    ""id"": ""9b93adbc-8adf-4a67-ab63-7648bfd4d7d7"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -92,6 +101,17 @@ public partial class @CANNON: IInputActionCollection2, IDisposable
                     ""action"": ""WASD"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""98d0df58-e46a-415b-a050-9d50e2931345"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Release"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -101,6 +121,7 @@ public partial class @CANNON: IInputActionCollection2, IDisposable
         // CannonControls
         m_CannonControls = asset.FindActionMap("CannonControls", throwIfNotFound: true);
         m_CannonControls_WASD = m_CannonControls.FindAction("WASD", throwIfNotFound: true);
+        m_CannonControls_Release = m_CannonControls.FindAction("Release", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -163,11 +184,13 @@ public partial class @CANNON: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_CannonControls;
     private List<ICannonControlsActions> m_CannonControlsActionsCallbackInterfaces = new List<ICannonControlsActions>();
     private readonly InputAction m_CannonControls_WASD;
+    private readonly InputAction m_CannonControls_Release;
     public struct CannonControlsActions
     {
         private @CANNON m_Wrapper;
         public CannonControlsActions(@CANNON wrapper) { m_Wrapper = wrapper; }
         public InputAction @WASD => m_Wrapper.m_CannonControls_WASD;
+        public InputAction @Release => m_Wrapper.m_CannonControls_Release;
         public InputActionMap Get() { return m_Wrapper.m_CannonControls; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -180,6 +203,9 @@ public partial class @CANNON: IInputActionCollection2, IDisposable
             @WASD.started += instance.OnWASD;
             @WASD.performed += instance.OnWASD;
             @WASD.canceled += instance.OnWASD;
+            @Release.started += instance.OnRelease;
+            @Release.performed += instance.OnRelease;
+            @Release.canceled += instance.OnRelease;
         }
 
         private void UnregisterCallbacks(ICannonControlsActions instance)
@@ -187,6 +213,9 @@ public partial class @CANNON: IInputActionCollection2, IDisposable
             @WASD.started -= instance.OnWASD;
             @WASD.performed -= instance.OnWASD;
             @WASD.canceled -= instance.OnWASD;
+            @Release.started -= instance.OnRelease;
+            @Release.performed -= instance.OnRelease;
+            @Release.canceled -= instance.OnRelease;
         }
 
         public void RemoveCallbacks(ICannonControlsActions instance)
@@ -207,5 +236,6 @@ public partial class @CANNON: IInputActionCollection2, IDisposable
     public interface ICannonControlsActions
     {
         void OnWASD(InputAction.CallbackContext context);
+        void OnRelease(InputAction.CallbackContext context);
     }
 }

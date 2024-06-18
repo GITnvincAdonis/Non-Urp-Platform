@@ -9,6 +9,7 @@ enum SceneName
     homeScreen,
     LevelOne,
     Room,
+    LVL2,
 }
 
 [CreateAssetMenu(fileName = "LevelSwitchSO",menuName = "levelSwitchSO")]
@@ -24,6 +25,7 @@ public class LvlSwitchSO : ScriptableObject
         { SceneName.homeScreen, "HomeScreen" },
         { SceneName.LevelOne, "LevelOne"},
         { SceneName.Room, "Room" },
+        {SceneName.LVL2, "LVL2" },
         // ...
     };
     void OnEnable()
@@ -58,6 +60,10 @@ public class LvlSwitchSO : ScriptableObject
     public void HomeScreenEventRaiser()
     {
         gameSceneToSwitchTo = names[SceneName.homeScreen];
+        switchedEvent?.Invoke(gameSceneToSwitchTo);
+    }
+    public void LevelTwoEventRaiser() {
+        gameSceneToSwitchTo = names[SceneName.LVL2];
         switchedEvent?.Invoke(gameSceneToSwitchTo);
     }
     public void RoomEventRaiser()

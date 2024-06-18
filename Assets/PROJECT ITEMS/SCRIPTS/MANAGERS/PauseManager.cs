@@ -10,6 +10,7 @@ public class PauseManager : MonoBehaviour
 
     private void Awake()
     {
+        
         if (instance == null)
         {
             instance = this;
@@ -18,17 +19,25 @@ public class PauseManager : MonoBehaviour
     // Start is called before the first frame update
     public void PauseGame()
     {
-        IsPaused = true;
-        Time.timeScale = 0f;
-        MenuManager.input.UI.Enable();
-        MenuManager.input.MOVES.Disable();
+        
+            Debug.Log("Paused game");
+            IsPaused = true;
+            Time.timeScale = 0f;
+            MenuManager.input.UI.Enable();
+            MenuManager.input.MOVES.Disable();
+        
     }
     public void UnpauseGame()
     {
-        IsPaused = false;
-        Time.timeScale = 1f;
-        MenuManager.input.UI.Disable();
-        MenuManager.input.MOVES.Enable();
+
+        
+        
+            Debug.Log("Unpaused game");
+            IsPaused = false;
+            Time.timeScale = 1f;
+            MenuManager.input.UI.Disable();
+            MenuManager.input.MOVES.Enable();
+        
     }
 
 

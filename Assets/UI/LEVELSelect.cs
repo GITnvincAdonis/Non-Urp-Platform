@@ -85,7 +85,7 @@ public class LEVELSelect : MonoBehaviour
         
         if (i==0) lvlEvents.RoomEventRaiser();
         if (i== 1) lvlEvents.LevelOneEventRaiser();
-        if (i==2) lvlEvents.LevelOneEventRaiser();
+        if (i==2) lvlEvents.LevelTwoEventRaiser();
         if (i==3) lvlEvents.LevelOneEventRaiser();
         //else lvlEvents.LevelOneEventRaiser();
         

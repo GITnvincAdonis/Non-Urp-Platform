@@ -27,7 +27,7 @@ public class RocketInstructions : MonoBehaviour
         if (destination != null)
         {
             
-            controller.Move(directions * Time.fixedDeltaTime* 10);
+            controller.Move(directions * Time.fixedDeltaTime* 25);
         }
     }
     public void GatherPlayerPosition(Vector3 pos)

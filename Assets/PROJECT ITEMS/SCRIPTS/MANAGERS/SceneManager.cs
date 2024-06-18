@@ -55,13 +55,7 @@ public class SceneManagerLocal : MonoBehaviour
         await Task.Delay(1000);
         //SceneManager.UnloadSceneAsync(currentLevel);
         scene = SceneManager.LoadSceneAsync("Room", LoadSceneMode.Single);
-                
-        
-        while (!scene.isDone)
-        {
-            await Task.Yield();
-        }
-
+     
         await Task.Delay(1000);
         UIevents.FadeOutEventRaiser();
     }
