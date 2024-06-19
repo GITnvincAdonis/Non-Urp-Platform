@@ -35,6 +35,7 @@ public class GPUInstancing : MonoBehaviour
     Quaternion _rotation;
     Vector3 _myScale;
     [SerializeField] int _maxScale;
+    [SerializeField] int _minScale;
     void Start()
     {
         //Matrix4x4 matrix4X4 = Matrix4x4.TRS(pos:postion,q:Quaternion.Euler(rotation),s:scale);
@@ -55,6 +56,7 @@ public class GPUInstancing : MonoBehaviour
         shader.SetInt("_Dimension", dimension);
         shader.SetInt("_scale", _scale);
         shader.SetInt("_maxScale",_maxScale);
+        shader.SetInt("_minScale", _minScale);
         shader.Dispatch(0, Mathf.CeilToInt(Instances / 8.0f), Mathf.CeilToInt(Instances / 8.0f),1); 
 
         tempbuffer.GetData(positionBuffer);

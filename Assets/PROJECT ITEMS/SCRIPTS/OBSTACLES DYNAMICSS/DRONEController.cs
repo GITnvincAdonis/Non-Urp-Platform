@@ -27,6 +27,8 @@ public class DRONEController : MonoBehaviour
     Task _updateDroneposition;
     Task _updateDroneYPos;
     Task _shootUpdate;
+
+
     // Start is called before the first frame update
     private void Awake()
     {
@@ -97,11 +99,14 @@ public class DRONEController : MonoBehaviour
         await Task.Delay(10);
         float destination = 0;
         //destination.x = _playerDestination.x - transform.position.x;
-        destination = _playerOffset +  _playerDestination.y + Mathf.Sin(Time.time + 10);
-        transform.DOMoveY(destination, 1f).SetEase(Ease.InOutQuad).OnComplete(() =>
+        RaycastHit hit;
+        Physics.Raycast(transform.position, Vector3.down * 10, out hit);
+        destination = _playerOffset +  hit.point.y  + Mathf.Sin(Time.time + 10);
+        transform.DOMoveY(destination, 5f).SetEase(Ease.InOutQuad).OnComplete(() =>
         {
             _updateDroneYPos = null;
         });
+        
     }
     void IdleDroneState()
     {
@@ -128,11 +133,12 @@ public class DRONEController : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
+        Debug.Log(other.gameObject);
         if (_currentState == DroneState.idle) {
+            Debug.Log("we in");
             _currentState = DroneState.Attack;
            
         }
-        Debug.Log("we in");
     }
     private void OnTriggerStay(Collider other)
     {

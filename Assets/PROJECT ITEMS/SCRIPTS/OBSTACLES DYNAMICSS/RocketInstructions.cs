@@ -38,6 +38,6 @@ public class RocketInstructions : MonoBehaviour
 
     private void OnControllerColliderHit(ControllerColliderHit hit)
     {
-        Destroy(gameObject);
+        if (!hit.collider.CompareTag("Drone")) Destroy(gameObject);
     }
 }

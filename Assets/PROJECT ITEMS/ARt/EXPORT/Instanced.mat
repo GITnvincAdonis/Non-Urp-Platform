@@ -28,6 +28,6 @@ Material:
     m_Colors:
     - _AmbientOcclusionColor: {r: 0, g: 0, b: 0, a: 1}
     - _Color: {r: 0.5943396, g: 0.34015658, b: 0.34015658, a: 1}
-    - _LerpBottomColor: {r: 0.29045033, g: 0.5754717, b: 0.43296102, a: 1}
-    - _LerpTopColor: {r: 0.037824843, g: 0.3207547, b: 0.21006025, a: 1}
+    - _LerpBottomColor: {r: 0.3881939, g: 0.5660378, b: 0.38803846, a: 1}
+    - _LerpTopColor: {r: 0.043402143, g: 0.1792453, b: 0.12641741, a: 1}
   m_BuildTextureStacks: []

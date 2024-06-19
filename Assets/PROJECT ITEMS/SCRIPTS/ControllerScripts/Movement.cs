@@ -197,23 +197,26 @@ public class Movement : MonoBehaviour
     void InteractEnabled(InputAction.CallbackContext context)
     {
         bool enabled = context.ReadValueAsButton();
-        Debug.Log("attempting to interact");
+        //Debug.Log("attempting to interact");
         if (_currentState == States.LauchState && _currentlyInInteractZone)
         {
             _currentState = States.GroundState;
             foreach (CannonController cannon in CANNONS){
                 if (cannon != null){
                     cannon.Interact(false);     
+                    cannon.Detach(gameObject.transform);
                 }
             }
         }
 
-        else if (_currentState != States.LauchState && _currentlyInInteractZone)
+        else if (_currentState != States.LauchState && _currentlyInInteractZone )
         {
             _currentState = States.LauchState;
             foreach (CannonController cannon in CANNONS){
                 if (cannon != null){
+                    //cannon.Attach(gameObject.transform, new Vector3(0, 0, 2));
                     cannon.Interact(true);   
+                    
                 }
             }
         }
@@ -367,7 +370,7 @@ public class Movement : MonoBehaviour
     }
     void LaunchingStateConditions()
     {
-        Debug.Log("flying");
+        //Debug.Log("flying");
     }
     public void ExtennalSpeedEffctor(float speed) { 
         _moveMentSpeed += speed;
@@ -426,7 +429,16 @@ public class Movement : MonoBehaviour
 
             LaunchingStateConditions();
         }
-      
+
+        foreach (CannonController cannon in CANNONS)
+        {
+            if (cannon != null && _currentState == States.LauchState)
+            {
+                cannon.Attach(gameObject.transform, new Vector3(0, 0, 2));
+                //cannon.Interact(true);
+
+            }
+        }
         _userInterface.ChangeSpeedBar(_moveMentSpeed, transform.position.x, transform.position.y, transform.position.z);
         _upwardForceActor = Mathf.Max(0, _upwardForceActor + _NormalGravity);
         _MoveDestination.y = Mathf.Max(-25, _MoveDestination.y);
@@ -489,7 +501,7 @@ public class Movement : MonoBehaviour
 
     void AcceptCannonPathCoord(float[] coords)
     {
-        if(_currentState == States.LauchingState) _controller.Move(new Vector3(coords[0], coords[1], coords[2])* Time.fixedDeltaTime * 11);
+        if(_currentState == States.LauchingState) _controller.Move(new Vector3(coords[0]* .8f, coords[1], coords[2])* Time.fixedDeltaTime );
     }
     private void OnEnable()
     {

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8822435827339056791}
   - component: {fileID: 7842450121534213303}
   - component: {fileID: 1772293436571456279}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: BouncePlat
   m_TagString: Bouncy
   m_Icon: {fileID: 0}
@@ -28,9 +28,9 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9176258865737478548}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.072517395, y: -3.84, z: 15.370001}
-  m_LocalScale: {x: 8.05, y: 0.19, z: 8.2}
+  m_LocalScale: {x: 0.17368811, y: 0.17692308, z: 0.18021826}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -133,3 +133,4 @@ MonoBehaviour:
   SwingSpeed: 0
   SpeedIncrease: 0
   upwardsForce: 0
+  DirectionSource: {fileID: 0}

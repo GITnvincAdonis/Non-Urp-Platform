@@ -18,7 +18,9 @@ public class Vaulter : MonoBehaviour, IAttachable
     
     public void Interact(bool state) { 
     }
-    public void Attach(Vector3 attachmentPoint) {
+    public void Attach(Transform child,Vector3 attachmentPoint) {
 
+    }
+    public void Detach(Transform child) { 
     }
 }
