@@ -33,6 +33,7 @@ public class TimerPlatforms : MonoBehaviour
 
     private void PlatformStartEvent()
     {
+        Debug.Log("yo");
         foreach (MeshCollider platform in platforms)
         {
             MeshRenderer appearance = platform.GetComponent<MeshRenderer>();

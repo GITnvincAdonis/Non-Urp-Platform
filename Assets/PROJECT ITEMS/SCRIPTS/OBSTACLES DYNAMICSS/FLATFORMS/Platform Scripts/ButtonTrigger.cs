@@ -23,6 +23,7 @@ public class ButtonTrigger : MonoBehaviour
     {
         if (other.CompareTag("Player") && player==null) 
         {
+           
             player = other;
             timerPlatSO.RaiseTimerEvent();
             TogglePlatState();

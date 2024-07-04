@@ -12,6 +12,7 @@ public class HealthSOScript : ScriptableObject
     public int healthLevel = 100;
 
     private void OnEnable(){
+        healthLevel = 100;
         if (healthEvent != null) healthEvent = new UnityEvent<int>();
     }
     public void RegisterEvent(GameObject script){
@@ -31,7 +32,11 @@ public class HealthSOScript : ScriptableObject
         healthLevel += healthIncrease;
         healthEvent.Invoke(healthLevel);
     }
-
+    public void ResetHealth()
+    {
+        healthLevel = 100;
+        healthEvent.Invoke(healthLevel);
+    }
 
 
 

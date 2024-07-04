@@ -20,6 +20,8 @@ public class TakeDamage : MonoBehaviour,IDamagable
 
     public DamageableType damagableType;
     [SerializeField] private HealthSOScript healthRef;
+    [SerializeField] private UserInterfaceSO uiObject;
+    [SerializeField] private WinConditionSO winSO;
     [SerializeField] private HealthSOScript dronehealth;
 
     [SerializeField] private Movement attachedScript;
@@ -37,7 +39,18 @@ public class TakeDamage : MonoBehaviour,IDamagable
     {
         if (damagableType == DamageableType.Player)
         {
-            healthRef.ReduceHealth(20);
+            healthRef.ReduceHealth(15);
+            float health = healthRef.healthLevel;
+            if (health <= 0 && damagableType == DamageableType.Player) { 
+                healthRef.ResetHealth();
+                winSO.RaiseLoseEvent(); 
+                    
+            }
+            
+
+            
+            Debug.Log(health);
+            uiObject.ChangeHealthBar((int)health);
         }
     }
     private void OnEnable()

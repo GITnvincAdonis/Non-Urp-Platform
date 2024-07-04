@@ -15,7 +15,7 @@ public class triggerFLightAnimation : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(animator.GetBool("InFlight"));
+        //Debug.Log(animator.GetBool("InFlight"));
     }
     private void OnTriggerEnter(Collider other)
     {

@@ -14,6 +14,7 @@ public class RocketInstructions : MonoBehaviour
     {
         controller = GetComponent<CharacterController>();
         Speed = 20;
+        Destroy(gameObject, 5);
         
     }
     void Start()
@@ -36,8 +37,33 @@ public class RocketInstructions : MonoBehaviour
         directions = (destination - transform.position).normalized;
     }
 
+    private void OnDestroy()
+    {
+        Collider[] collider = Physics.OverlapSphere(transform.position, 5);
+
+        foreach (Collider collider2 in collider)
+        {
+            if (collider2.gameObject.GetComponent<IDamagable>() != null && !collider2.CompareTag("Drone"))
+            {
+                Debug.Log("HITTTT");
+                collider2.GetComponent<IDamagable>().TakeHurt();
+                break;
+            }
+            
+            Debug.Log(collider2.name);
+
+        }
+    }
     private void OnControllerColliderHit(ControllerColliderHit hit)
     {
+
+        
+
+
+        if (hit.collider.GetComponent<IDamagable>() != null) {
+            Debug.Log("Hit player");
+            
+        }
         if (!hit.collider.CompareTag("Drone")) Destroy(gameObject);
     }
 }

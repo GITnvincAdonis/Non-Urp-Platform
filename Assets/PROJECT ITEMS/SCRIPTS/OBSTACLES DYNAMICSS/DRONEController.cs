@@ -75,7 +75,7 @@ public class DRONEController : MonoBehaviour
         {
             GameObject instantiatedRocket = Instantiate(rockets.gameObject, transform.position + transform.forward, transform.rotation);
             instantiatedRocket.GetComponent<RocketInstructions>().GatherPlayerPosition(transform.position + (transform.forward) * 2);
-            await Task.Delay(20);
+            await Task.Delay(400);
         }
         int seed = Random.Range(_MinShootInterval, _MaxShootInterval);
         await Task.Delay(seed * 1000);
@@ -135,7 +135,7 @@ public class DRONEController : MonoBehaviour
     {
         Debug.Log(other.gameObject);
         if (_currentState == DroneState.idle) {
-            Debug.Log("we in");
+           // Debug.Log("we in");
             _currentState = DroneState.Attack;
            
         }
@@ -152,7 +152,7 @@ public class DRONEController : MonoBehaviour
                 _currentState = DroneState.idle;
                 _playerDestination = Vector3.zero;
             }
-            Debug.Log("we out");
+            //Debug.Log("we out");
 
         }
     }

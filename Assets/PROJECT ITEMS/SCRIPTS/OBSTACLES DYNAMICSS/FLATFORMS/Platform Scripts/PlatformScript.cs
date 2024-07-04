@@ -71,7 +71,7 @@ public class PlatformScript : MonoBehaviour
         if (BehaviourType == PlatformBehaviour.rotatingX)
         {
             Vector3 rotationDestination = Vector3.zero;
-            rotationDestination.x = 360f;
+            rotationDestination.x = 360f + transform.rotation.eulerAngles.x;
 
             tweens.Add(transform.DORotate(rotationDestination, RotationDuration, RotateMode.FastBeyond360).SetLoops(-1).SetEase(Ease.Linear));
 
@@ -79,7 +79,7 @@ public class PlatformScript : MonoBehaviour
         if (BehaviourType == PlatformBehaviour.rotatingY)
         {
             Vector3 rotationDestination = Vector3.zero;
-            rotationDestination.y = 360f;
+            rotationDestination.y = 360f + transform.rotation.eulerAngles.y;
 
             tweens.Add(transform.DORotate(rotationDestination, RotationDuration, RotateMode.FastBeyond360).SetLoops(-1).SetEase(Ease.Linear));
 
@@ -87,7 +87,7 @@ public class PlatformScript : MonoBehaviour
         if (BehaviourType == PlatformBehaviour.rotatingZ)
         {
             Vector3 rotationDestination = Vector3.zero;
-            rotationDestination.z = 360f;
+            rotationDestination.z = 360f + transform.rotation.eulerAngles.z;
 
             tweens.Add(transform.DORotate(rotationDestination, RotationDuration, RotateMode.FastBeyond360).SetLoops(-1).SetEase(Ease.Linear));
 
@@ -147,7 +147,7 @@ public class PlatformScript : MonoBehaviour
     }
     private void OnTriggerExit(Collider other)
     {
-        if(BehaviourType == PlatformBehaviour.oneWay) collider.enabled = false;
+        if(BehaviourType == PlatformBehaviour.oneWay && (LayerMask.LayerToName(other.gameObject.layer) == "PlayerWIreframe")) collider.enabled = false;
     }
     private void OnTriggerStay(Collider other)
     {

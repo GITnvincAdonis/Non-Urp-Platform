@@ -21,6 +21,7 @@ public class MainMenuScreen : MonoBehaviour
     [SerializeField] private MenuState state;
     [SerializeField] private UserInterfaceSO UIEvents;
     [SerializeField] private LvlSwitchSO lvlEvents;
+    [SerializeField] private HealthSOScript healthRef;
     VisualElement root;
     [SerializeField] private UIDocument _document;
    

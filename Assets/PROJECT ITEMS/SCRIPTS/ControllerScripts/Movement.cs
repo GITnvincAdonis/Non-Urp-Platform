@@ -197,16 +197,13 @@ public class Movement : MonoBehaviour
     void InteractEnabled(InputAction.CallbackContext context)
     {
         bool enabled = context.ReadValueAsButton();
-        //Debug.Log("attempting to interact");
-        if (_currentState == States.LauchState && _currentlyInInteractZone)
+        
+        if (_currentState == States.LauchingState)
         {
+            Debug.Log("unparwnt");
+            transform.SetParent(null);
             _currentState = States.GroundState;
-            foreach (CannonController cannon in CANNONS){
-                if (cannon != null){
-                    cannon.Interact(false);     
-                    cannon.Detach(gameObject.transform);
-                }
-            }
+            
         }
 
         else if (_currentState != States.LauchState && _currentlyInInteractZone )
@@ -459,7 +456,9 @@ public class Movement : MonoBehaviour
             _MoveDestination.y = _initialVelocity * 2;
             ToggleJumpState();
         }
-        if (_currentState == States.LauchingState) { 
+        if (_currentState == States.LauchingState) {
+            //Debug.Log("unparwnt");
+            transform.SetParent(null);
             _currentState = States.GroundState;
         }
     }
