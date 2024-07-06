@@ -73,6 +73,12 @@ public class Movement : MonoBehaviour
 
 
 
+
+
+    [SerializeField] private ParticleSystem _runParticles;
+    [SerializeField] private ParticleSystem _collisionParticles;
+
+
     // Start is called before the first frame update
     private void Awake()
     {
@@ -161,7 +167,8 @@ public class Movement : MonoBehaviour
         if(_currentState != States.LauchState) handleJump();
         if(_currentState == States.LauchState)
         {
-            _currentState = States.LauchingState;
+            ChangeState(States.LauchingState);
+            //_currentState = States.LauchingState;
         }
     }
     void SlideActiviated(InputAction.CallbackContext context)
@@ -170,8 +177,9 @@ public class Movement : MonoBehaviour
         _isSliding = state;
         //Debug.Log("it");
         if (state && (_currentState == States.GroundState))
-        {  
-            _currentState = States.SlideState;
+        {
+            ChangeState(States.SlideState);
+            //_currentState = States.SlideState;
             _animator.SetTrigger("SlideTrigger");
             StartForceSlide();
             SlideColliderTrigger(_slideColliderHeight);
@@ -189,8 +197,9 @@ public class Movement : MonoBehaviour
             _MoveDestination.y = -6;
         }
         else if (_isCrouching && (_currentState == States.GroundState) && (_moveMentSpeed >= 5))
-        { 
-            _currentState = States.SlideState;
+        {
+            ChangeState(States.SlideState);
+            //_currentState = States.SlideState;
             SlideColliderTrigger(_slideColliderHeight);
         }
     }
@@ -202,13 +211,15 @@ public class Movement : MonoBehaviour
         {
             Debug.Log("unparwnt");
             transform.SetParent(null);
-            _currentState = States.GroundState;
+            ChangeState(States.GroundState);
+            //_currentState = States.GroundState;
             
         }
 
         else if (_currentState != States.LauchState && _currentlyInInteractZone )
         {
-            _currentState = States.LauchState;
+            ChangeState(States.LauchState);
+            //_currentState = States.LauchState;
             foreach (CannonController cannon in CANNONS){
                 if (cannon != null){
                     //cannon.Attach(gameObject.transform, new Vector3(0, 0, 2));
@@ -240,7 +251,8 @@ public class Movement : MonoBehaviour
         }
         SlideColliderTrigger(_normalColliderHeight);
         StopForceSlide();
-        _currentState = States.GroundState;
+        ChangeState(States.GroundState);
+        //_currentState = States.GroundState;
 
     }
     void StartForceSlide(){
@@ -299,14 +311,18 @@ public class Movement : MonoBehaviour
 
 
     // STATE SPECIFIC LOGIC===========================================================================================================================================================================
-
+    void ChangeState(States stateToSwitchTo)
+    {
+        if (stateToSwitchTo == States.GroundState || stateToSwitchTo == States.JumpState) _collisionParticles.Play();
+        _currentState = stateToSwitchTo;
+    }
     void GroundStateConditions(){
         _JumpCount = 0;
         HandleRotation(_turnFactor);
         HandleGroundGravity(); 
         if (_JumpPress){
            // Debug.Log("grounded, jumping");
-            _currentState = States.JumpState;
+            ChangeState(States.JumpState);
         }
         if (!_controller.isGrounded)
         {
@@ -323,7 +339,7 @@ public class Movement : MonoBehaviour
         HandleGravity();
         if (_controller.isGrounded){
             //Debug.Log("grounded here");
-            _currentState = States.GroundState;
+            ChangeState(States.GroundState);
         }
         
         
@@ -344,14 +360,15 @@ public class Movement : MonoBehaviour
             
             _SlideDestination.y = 0;
             SlideColliderTrigger(_normalColliderHeight);
-            _currentState = States.JumpState;
+            ChangeState(States.JumpState);
             StopForceSlide();
         }
         if (!_isMoving)
         {
             
             _SlideDestination.y = 0;
-            _currentState = States.GroundState;
+            
+            ChangeState(States.GroundState);
             SlideColliderTrigger(_normalColliderHeight);
             StopForceSlide();
         }
@@ -376,6 +393,7 @@ public class Movement : MonoBehaviour
  
     void FixedUpdate()
     {
+
         float blendFactor = Mathf.Clamp((_moveMentSpeed), 0.0f, 15f);
         //Debug.Log(blendFactor);
         _animator.SetFloat("Blend", blendFactor);
@@ -440,6 +458,18 @@ public class Movement : MonoBehaviour
         _upwardForceActor = Mathf.Max(0, _upwardForceActor + _NormalGravity);
         _MoveDestination.y = Mathf.Max(-25, _MoveDestination.y);
 
+
+
+
+        if(_moveMentSpeed >= 10 && _controller.isGrounded && _isMoving)
+        {
+            _runParticles.Play();
+        }
+        else
+        {
+            _runParticles.Stop();
+        }
+
        
 
     }
@@ -459,14 +489,14 @@ public class Movement : MonoBehaviour
         if (_currentState == States.LauchingState) {
             //Debug.Log("unparwnt");
             transform.SetParent(null);
-            _currentState = States.GroundState;
+            ChangeState(States.GroundState);
         }
     }
     
     async void ToggleJumpState()
     {
         await Task.Delay(100);
-        _currentState = States.JumpState;
+        ChangeState(States.JumpState);
     }
  
 

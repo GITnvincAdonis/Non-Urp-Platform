@@ -4,6 +4,7 @@ using UnityEngine;
 using DG.Tweening;
 using System.Threading.Tasks;
 using Unity.Loading;
+using Cinemachine;
 
 
 public class TakeDamage : MonoBehaviour,IDamagable
@@ -26,9 +27,11 @@ public class TakeDamage : MonoBehaviour,IDamagable
 
     [SerializeField] private Movement attachedScript;
     [SerializeField] private CharacterController characterController;
+    CinemachineImpulseSource CinemachineImpulseSource;
 
     private void Awake()
     {
+        CinemachineImpulseSource = GetComponent<CinemachineImpulseSource>();
         if (damagableType == DamageableType.Player)
         {
             attachedScript = GetComponent<Movement>();
@@ -51,6 +54,7 @@ public class TakeDamage : MonoBehaviour,IDamagable
             
             Debug.Log(health);
             uiObject.ChangeHealthBar((int)health);
+            CinemachineImpulseSource.GenerateImpulse();
         }
     }
     private void OnEnable()

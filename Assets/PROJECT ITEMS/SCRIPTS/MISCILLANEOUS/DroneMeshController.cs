@@ -21,7 +21,7 @@ public class DroneMeshController : MonoBehaviour
         rawRotation.z = Mathf.Clamp(rawRotation.z, 10, 30);
 
         float tempRot = rawRotation.z;
-        Debug.Log(rawRotation);
+       
         transform.rotation = Quaternion.Euler(new Vector3(rawRotation.x, rawRotation.y, tempRot));
         //transform.localRotation = targetInfo.localRotation;
 

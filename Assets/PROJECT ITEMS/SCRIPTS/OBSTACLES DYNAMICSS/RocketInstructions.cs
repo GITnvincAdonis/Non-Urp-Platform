@@ -5,6 +5,7 @@ using DG.Tweening;
 [RequireComponent(typeof(CharacterController))]
 public class RocketInstructions : MonoBehaviour
 {
+    [SerializeField] GameObject _particles;
     CharacterController controller;
     float Speed;
     Vector3 destination;
@@ -39,7 +40,7 @@ public class RocketInstructions : MonoBehaviour
 
     private void OnDestroy()
     {
-        Collider[] collider = Physics.OverlapSphere(transform.position, 5);
+        Collider[] collider = Physics.OverlapSphere(transform.position, 3);
 
         foreach (Collider collider2 in collider)
         {
@@ -53,17 +54,21 @@ public class RocketInstructions : MonoBehaviour
             Debug.Log(collider2.name);
 
         }
+        GameObject Localparticle = Instantiate(_particles, transform.position, Quaternion.identity);
+        Localparticle.GetComponent<ParticleSystem>().Play();
+
     }
     private void OnControllerColliderHit(ControllerColliderHit hit)
     {
 
         
-
+        
 
         if (hit.collider.GetComponent<IDamagable>() != null) {
             Debug.Log("Hit player");
             
         }
         if (!hit.collider.CompareTag("Drone")) Destroy(gameObject);
+        
     }
 }

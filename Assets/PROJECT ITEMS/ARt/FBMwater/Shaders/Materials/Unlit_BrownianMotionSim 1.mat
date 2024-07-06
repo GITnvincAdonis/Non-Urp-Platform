@@ -100,6 +100,6 @@ Material:
     - _speedRamp: 1.14
     - _vertexHeight: 1.52
     m_Colors:
-    - _BaseColor: {r: 0, g: 0.30231693, b: 0.36862746, a: 0}
-    - _TipColor: {r: 0.5, g: 0.14465407, b: 0.14465407, a: 1}
+    - _BaseColor: {r: 0, g: 0.0754717, b: 0.0315076, a: 0}
+    - _TipColor: {r: 0, g: 0.07450981, b: 0.03137255, a: 1}
   m_BuildTextureStacks: []
