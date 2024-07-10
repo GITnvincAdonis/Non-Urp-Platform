@@ -23,26 +23,21 @@ public class TakeDamage : MonoBehaviour,IDamagable
     [SerializeField] private HealthSOScript healthRef;
     [SerializeField] private UserInterfaceSO uiObject;
     [SerializeField] private WinConditionSO winSO;
-    [SerializeField] private HealthSOScript dronehealth;
+    
 
-    [SerializeField] private Movement attachedScript;
-    [SerializeField] private CharacterController characterController;
+    [SerializeField] private DamageEventSO damageEvent;
     CinemachineImpulseSource CinemachineImpulseSource;
 
     private void Awake()
     {
         CinemachineImpulseSource = GetComponent<CinemachineImpulseSource>();
-        if (damagableType == DamageableType.Player)
-        {
-            attachedScript = GetComponent<Movement>();
-            characterController = GetComponent<CharacterController>();
-        }
+       
     }
     public void TakeHurt()
     {
         if (damagableType == DamageableType.Player)
         {
-            healthRef.ReduceHealth(15);
+            healthRef.ReduceHealth(35);
             float health = healthRef.healthLevel;
             if (health <= 0 && damagableType == DamageableType.Player) { 
                 healthRef.ResetHealth();
@@ -54,7 +49,8 @@ public class TakeDamage : MonoBehaviour,IDamagable
             
             Debug.Log(health);
             uiObject.ChangeHealthBar((int)health);
-            CinemachineImpulseSource.GenerateImpulse();
+            CinemachineImpulseSource.GenerateImpulseWithForce(3);
+            damageEvent.RaiseDamageEvent();
         }
     }
     private void OnEnable()

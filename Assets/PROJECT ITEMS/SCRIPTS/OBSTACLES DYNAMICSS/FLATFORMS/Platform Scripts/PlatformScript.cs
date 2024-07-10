@@ -62,7 +62,7 @@ public class PlatformScript : MonoBehaviour
     {
         RotationLogic();
         LinearMovementLogic();
-        OneWayLogic();
+     
         SwingLogic();
         FallLogic();
     }
@@ -72,25 +72,19 @@ public class PlatformScript : MonoBehaviour
         {
             Vector3 rotationDestination = Vector3.zero;
             rotationDestination.x = 360f + transform.rotation.eulerAngles.x;
-
             tweens.Add(transform.DORotate(rotationDestination, RotationDuration, RotateMode.FastBeyond360).SetLoops(-1).SetEase(Ease.Linear));
-
         }
         if (BehaviourType == PlatformBehaviour.rotatingY)
         {
             Vector3 rotationDestination = Vector3.zero;
             rotationDestination.y = 360f + transform.rotation.eulerAngles.y;
-
             tweens.Add(transform.DORotate(rotationDestination, RotationDuration, RotateMode.FastBeyond360).SetLoops(-1).SetEase(Ease.Linear));
-
         }
         if (BehaviourType == PlatformBehaviour.rotatingZ)
         {
             Vector3 rotationDestination = Vector3.zero;
             rotationDestination.z = 360f + transform.rotation.eulerAngles.z;
-
             tweens.Add(transform.DORotate(rotationDestination, RotationDuration, RotateMode.FastBeyond360).SetLoops(-1).SetEase(Ease.Linear));
-
         }
     }
     void LinearMovementLogic()
@@ -102,10 +96,6 @@ public class PlatformScript : MonoBehaviour
             tweens.Add(transform.DOMove(Destination,DisplacementDuration).SetLoops(-1, LoopType.Yoyo).SetEase(Ease.Linear));
         }
     }
-    void OneWayLogic()
-    {
-       
-    }
     void FallLogic()
     {
         if (BehaviourType == PlatformBehaviour.FallThrough)
@@ -113,31 +103,24 @@ public class PlatformScript : MonoBehaviour
             rb = GetComponent<Rigidbody>();
             rb.isKinematic = true;
             rb.useGravity = false;
-
         }
     }
     void SwingLogic()
-    {
-        
+    {   
         if(BehaviourType == PlatformBehaviour.Swinging)
         {
             Vector3[] points = new Vector3[3];
             points[0] = SwingPoint1.position;
             points[1] = SwingPoint2.position;
             points[2] = SwingPoint3.position;
-            //transform.DOMove(Destination,DisplacementDuration).SetLoops(-1, LoopType.Yoyo).SetEase(Ease.Linear);
-            //transform.DOBlendableMoveBy(new Vector3(1,3,5), 10).SetLoops(-1, LoopType.Yoyo);
-
             tweens.Add(transform.DOLocalPath(points, SwingSpeed, PathType.CubicBezier).SetLoops(-1, LoopType.Yoyo).SetEase(Ease.InOutCubic)); 
         }
     }
     private void OnTriggerEnter(Collider other)
     {
         if (BehaviourType == PlatformBehaviour.oneWay) collider.enabled = true;
-
         else if (BehaviourType == PlatformBehaviour.FallThrough && other.gameObject.CompareTag("Player"))
         {
-            //Debug.Log("player Collision");
             RigidBodyActivate(rb);
         }
         else if(BehaviourType == PlatformBehaviour.Speeding && !(other.GetComponent<Movement>()==null))
@@ -153,11 +136,9 @@ public class PlatformScript : MonoBehaviour
     {
         if(BehaviourType == PlatformBehaviour.UpWardBlowers && !(other.GetComponent<Movement>() == null))
         {
-
             other.GetComponent<Movement>()._MoveDestination.y = Mathf.Max(other.GetComponent<Movement>()._MoveDestination.y,-15);
             other.GetComponent<Movement>()._upwardForceActor = Mathf.Min(other.GetComponent<Movement>()._upwardForceActor, 30);
             other.GetComponent<Movement>()._upwardForceActor += upwardsForce *1.4f* Time.fixedDeltaTime;
-
         }
     }
 
@@ -172,23 +153,11 @@ public class PlatformScript : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.HSVToRGB(10,100,10);
-        
-        
-        /*if (BehaviourType == PlatformBehaviour.UpWardBlowers)
-        {
-            
-            Gizmos.DrawLine(DirectionSource.position, transform.position + (DirectionSource.position - transform.position) * 3);
-            Physics.Raycast(transform.position, transform.up, 20);
-        }*/
          if(BehaviourType == PlatformBehaviour.LineMove)
         {
-            //Vector3 postionDif = (transform.position +Displacement) - transform.position;
-            
             Gizmos.DrawLine(initialPos, initialPos + Displacement);
             Gizmos.DrawSphere(initialPos, .4f);
             Gizmos.DrawSphere(initialPos + Displacement, .4f);
-
-            
         }
     }
     private void OnDestroy()

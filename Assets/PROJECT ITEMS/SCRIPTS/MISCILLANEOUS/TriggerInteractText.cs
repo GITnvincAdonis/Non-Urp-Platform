@@ -6,6 +6,7 @@ public class TriggerInteractText : MonoBehaviour
 {
     [SerializeField] UserInterfaceSO UserInterfaceSO;
     [SerializeField] string InstructionString;
+    [SerializeField] Texture2D InstructionImage;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,7 +20,7 @@ public class TriggerInteractText : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        UserInterfaceSO.AddTextEventRaiser(InstructionString);
+        UserInterfaceSO.AddTextEventRaiser(InstructionString,InstructionImage);
         
         
     }

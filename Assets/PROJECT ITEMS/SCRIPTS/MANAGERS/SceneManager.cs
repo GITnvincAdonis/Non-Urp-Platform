@@ -57,8 +57,6 @@ public class SceneManagerLocal : MonoBehaviour
         string thisLvl = SceneManager.GetActiveScene().name;
         Debug.Log(thisLvl);
         scene = SceneManager.LoadSceneAsync(thisLvl, LoadSceneMode.Single);
-     
-        await Task.Delay(1000);
         UIevents.FadeOutEventRaiser();
     }
     public async void retrieveLvlToSwitch(string name)
@@ -66,10 +64,9 @@ public class SceneManagerLocal : MonoBehaviour
         if (name != currentLevel)
         {
             UIevents.FadeInEventRaiser();
-            await Task.Delay(3000);
             var scene = SceneManager.LoadSceneAsync(name);
             currentLevel = name;
-            
+            await Task.Delay(500);
             UIevents.FadeOutEventRaiser();
         }
 

@@ -5,12 +5,14 @@ using DG.Tweening;
 using System.Data.Common;
 using System.Threading.Tasks;
 using Unity.VisualScripting;
+using TMPro;
 [RequireComponent(typeof(CharacterController))]
 public class DRONEController : MonoBehaviour
 {
     public enum DroneState
     {
         idle,
+        RestReturn,
         Attack
     }
     [SerializeField] RocketInstructions rockets;
@@ -28,16 +30,21 @@ public class DRONEController : MonoBehaviour
     Task _updateDroneYPos;
     Task _shootUpdate;
 
+    Vector3 _restPosition;
+
 
     // Start is called before the first frame update
     private void Awake()
     {
-        _currentState = DroneState.idle;
+        
+        ChangeState(DroneState.idle);
+        
         _droneController = GetComponent<CharacterController>();
     }
     void Start()
     {
-        
+        _restPosition = transform.position;
+
     }
 
 
@@ -99,44 +106,76 @@ public class DRONEController : MonoBehaviour
         await Task.Delay(10);
         float destination = 0;
         //destination.x = _playerDestination.x - transform.position.x;
-        RaycastHit hit;
-        Physics.Raycast(transform.position, Vector3.down * 10, out hit);
-        destination = _playerOffset +  hit.point.y  + Mathf.Sin(Time.time + 10);
+       
+        destination = _playerOffset + (_playerDestination.y* 0.5f)+ Mathf.Sin(Time.time + 10);
         transform.DOMoveY(destination, 5f).SetEase(Ease.InOutQuad).OnComplete(() =>
         {
             _updateDroneYPos = null;
         });
         
     }
-    void IdleDroneState()
+
+    void ChangeState(DroneState state) {
+        
+        _currentState = state;
+       
+    }
+    void RestReturnLogic()
     {
+
+
+        _playerDestination = _restPosition;
+        if (_playerDestination != Vector3.zero)
+        {
+            Quaternion _rotation = Quaternion.LookRotation(_playerDestination - transform.position);
+            Quaternion _currentRotation = transform.rotation;
+            transform.rotation = Quaternion.Slerp(_currentRotation, _rotation, _slerpSpeed);
+
+        }
+        if (_updateDroneposition == null)
+        {
+            _updateDroneposition = UpdateDrone();
+
+        }
+       
+        if (Vector3.Distance(transform.position,_restPosition) <= 6f) {
+            ChangeState(DroneState.idle);
+        }
+        
 
     }
     // Update is called once per frame
     void FixedUpdate()
     {
+        if (_currentState == DroneState.RestReturn)
+        {
+            RestReturnLogic();
+            Vector3 destination = Vector3.zero;
+            destination.y = Mathf.Sin(Time.time + 10);
+        }
         if (_currentState == DroneState.idle)
         {
-            IdleDroneState();   
+              
         }
         if (_currentState == DroneState.Attack)
         {
             AttackStateConditions();
             Vector3 destination = Vector3.zero;
-            //destination.x = _playerDestination.x - transform.position.x;
             destination.y = Mathf.Sin(Time.time + 10);
-            //destination.z = _playerDestination.z - transform.position.z;
-
-            //_droneController.Move(destination.normalized * Time.fixedDeltaTime);
+           
         }
-        
+        //Debug.Log(_currentState);
+        if (_currentState == DroneState.RestReturn) Debug.Log(_playerDestination);
+        //Debug.Log(Vector3.Distance(transform.position, _restPosition));
+
     }
     private void OnTriggerEnter(Collider other)
     {
         Debug.Log(other.gameObject);
         if (_currentState == DroneState.idle) {
-           // Debug.Log("we in");
-            _currentState = DroneState.Attack;
+            // Debug.Log("we in");
+            ChangeState(DroneState.Attack);
+           
            
         }
     }
@@ -149,7 +188,7 @@ public class DRONEController : MonoBehaviour
         if (LayerMask.LayerToName(other.gameObject.layer) == "PlayerWIreframe")
         {
             if (_currentState == DroneState.Attack){
-                _currentState = DroneState.idle;
+                ChangeState(DroneState.RestReturn);  
                 _playerDestination = Vector3.zero;
             }
             //Debug.Log("we out");

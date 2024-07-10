@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7890246623922821655}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: GameObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -46,7 +46,7 @@ GameObject:
   - component: {fileID: 936207815017478025}
   - component: {fileID: 6168830422707185485}
   - component: {fileID: 1564877825105977047}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: CANON
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -171,7 +171,7 @@ GameObject:
   - component: {fileID: 2989701121843315982}
   - component: {fileID: 6355644207532174737}
   - component: {fileID: 7596238312263900393}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cube.058
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -254,7 +254,7 @@ GameObject:
   - component: {fileID: 1890306258091800432}
   - component: {fileID: 4831329953880594820}
   - component: {fileID: 1910021287714869226}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cylinder.009
   m_TagString: Untagged
   m_Icon: {fileID: 0}

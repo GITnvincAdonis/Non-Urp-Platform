@@ -7,8 +7,9 @@ using UnityEngine.Events;
 [CreateAssetMenu(fileName ="UIEvents",menuName ="UIEvents")]
 public class UserInterfaceSO : ScriptableObject
 {
-    public UnityEvent<string> InstructionEvent;
+    public UnityEvent<string, Texture2D> InstructionEvent;
     public string InstructionText;
+    public Texture2D InstructionImage;
 
     public UnityEvent ExitEvent;
 
@@ -39,7 +40,7 @@ public class UserInterfaceSO : ScriptableObject
 
     private void OnEnable()
     {
-        if (InstructionEvent == null) InstructionEvent = new UnityEvent<string>();
+        if (InstructionEvent == null) InstructionEvent = new UnityEvent<string, Texture2D>();
         if (ExitEvent == null) ExitEvent = new UnityEvent();
         if (UpdateHealthBarEvent == null) UpdateHealthBarEvent = new UnityEvent<int>();
         if (UpdateSpeedEvent == null) UpdateSpeedEvent = new UnityEvent<float, float, float, float>();
@@ -68,10 +69,11 @@ public class UserInterfaceSO : ScriptableObject
         }
     }
 
-    public void AddTextEventRaiser(string text)
+    public void AddTextEventRaiser(string text, Texture2D image)
     {
         InstructionText = text;
-        InstructionEvent.Invoke(InstructionText);
+        InstructionImage = image;
+        InstructionEvent.Invoke(InstructionText, InstructionImage);
     }
     public void RemoveTextEventRaiser() {
         ExitEvent.Invoke();

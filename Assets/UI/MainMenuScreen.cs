@@ -50,6 +50,8 @@ public class MainMenuScreen : MonoBehaviour
 
     [SerializeField] PauseManager pauseManager;
     Label InstructionContainer;
+
+    VisualElement InstructionImage;
     VisualElement bar;
     VisualElement innerBar;
     VisualElement speedbar;
@@ -148,7 +150,8 @@ public class MainMenuScreen : MonoBehaviour
 
         InstructionContainer = new Label();
         InstructionContainer.AddToClassList("instruct-container");
-        InstructionContainer.Insert(0, createElement("instruction-image"));
+        InstructionImage = createElement("instruction-image");
+        InstructionContainer.Insert(0,InstructionImage);
         for (int i = 0; i < containers.Length; i++) {
             VisualElement rendText = new();
             
@@ -244,11 +247,12 @@ public class MainMenuScreen : MonoBehaviour
         containers[3].Insert(0,image);
         
     }
-    private void AppendInstructions(string text)
+    private void AppendInstructions(string text, Texture2D image)
     {
         string mytext = text;
         DOTween.To(() => InstructionContainer.text, x => InstructionContainer.text = x, mytext, .2f).SetEase(Ease.Linear);
         InstructionContainer.ToggleInClassList("in-view");
+        InstructionImage.style.backgroundImage = image;
     }
     private void RemoveInstructionText()
     {

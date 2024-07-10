@@ -19,9 +19,9 @@ TagManager:
   - Cannon
   - Player
   - GhibliLeaves
-  - 
-  - 
-  - 
+  - PlayerMesh
+  - Drone
+  - outline
   - 
   - 
   - 

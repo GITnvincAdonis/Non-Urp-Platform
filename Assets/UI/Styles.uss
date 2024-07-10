@@ -16,6 +16,7 @@
 .visible{
 	background-color: black;
 }
+
 .instruct-container{
 	position: absolute;
 	transition-duration: 100ms;
@@ -24,18 +25,20 @@
 	
 
 	
-	
-	
 
+
+	
 	-unity-text-align: upper-center;
+	-unity-font-style: bold;
 	margin: 0 0 0 0%;
 	
 	
-	height: 15%;
+	height: 40%;
 	
 	color:white;
+	text-outline: black;
 	
-	bottom:28%;
+	bottom:0%;
 	white-space: normal;
 	width:100%;
 	opacity:0;
@@ -43,9 +46,9 @@
 	
 }
 .in-view{
-	
+	background-color: rgba(1,1,1,.2);
 	opacity: .8;
-	font-size: 25px;
+	font-size: 35px;
 	
 	
 }
@@ -53,10 +56,13 @@
 	border-color: black;
 	border-width: 3px;
 	align-self:center;
-	height:30px;
-	width: 160px;
+	height:260px;
+	width: 560px;
+	-unity-background-scale-mode: scale-to-fit;
 	
-	margin-top: 26px;	
+	background-overflow: ellipsis;
+	background-position: center;
+	margin-top: -300px;	
 	
 }
 .container

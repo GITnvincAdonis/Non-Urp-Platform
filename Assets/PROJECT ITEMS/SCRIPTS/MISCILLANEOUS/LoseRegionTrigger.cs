@@ -20,5 +20,6 @@ public class LoseRegionTrigger : MonoBehaviour
     {
 
         winConSO.RaiseLoseEvent();
+
     }
 }

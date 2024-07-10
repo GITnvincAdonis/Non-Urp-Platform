@@ -19,7 +19,7 @@ public class triggerFLightAnimation : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log(other.tag);
+        //Debug.Log(other.tag);
         if(LayerMask.LayerToName(other.gameObject.layer) == "Fan") animator.SetBool("InFlight", true);
     }
     private void OnTriggerExit(Collider other)
