@@ -18,5 +18,5 @@ MonoBehaviour:
   StopTimerEvent:
     m_PersistentCalls:
       m_Calls: []
-  TImer: 6
+  TImer: 10
   listeners: []

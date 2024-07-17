@@ -5,9 +5,10 @@ using DG.Tweening;
 using System.Threading.Tasks;
 using Unity.Loading;
 using Cinemachine;
+using TreeEditor;
 
 
-public class TakeDamage : MonoBehaviour,IDamagable
+public class TakeDamage : MonoBehaviour, IDamagable
 {
     public enum DamageableType
     {
@@ -23,7 +24,7 @@ public class TakeDamage : MonoBehaviour,IDamagable
     [SerializeField] private HealthSOScript healthRef;
     [SerializeField] private UserInterfaceSO uiObject;
     [SerializeField] private WinConditionSO winSO;
-    
+    [SerializeField] private AudioEventSO audioEvent;
 
     [SerializeField] private DamageEventSO damageEvent;
     CinemachineImpulseSource CinemachineImpulseSource;
@@ -51,6 +52,7 @@ public class TakeDamage : MonoBehaviour,IDamagable
             uiObject.ChangeHealthBar((int)health);
             CinemachineImpulseSource.GenerateImpulseWithForce(3);
             damageEvent.RaiseDamageEvent();
+            audioEvent.RaiseAudioEvent(AudioLibrary.instance._hurt,transform.position, false, false); 
         }
     }
     private void OnEnable()

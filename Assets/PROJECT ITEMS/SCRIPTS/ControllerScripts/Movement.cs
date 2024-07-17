@@ -78,6 +78,8 @@ public class Movement : MonoBehaviour
     [SerializeField] private ParticleSystem _runParticles;
     [SerializeField] private ParticleSystem _collisionParticles;
 
+    [SerializeField] private AudioEventSO _audioEventSO;
+
 
     // Start is called before the first frame update
     private void Awake()
@@ -313,7 +315,11 @@ public class Movement : MonoBehaviour
     // STATE SPECIFIC LOGIC===========================================================================================================================================================================
     void ChangeState(States stateToSwitchTo)
     {
-        if (stateToSwitchTo == States.GroundState || stateToSwitchTo == States.JumpState) _collisionParticles.Play();
+        if (stateToSwitchTo == States.GroundState || stateToSwitchTo == States.JumpState)
+        {
+            _collisionParticles.Play();
+            _audioEventSO.RaiseAudioEvent(AudioLibrary.instance._LandingSound, transform.position, true,false);
+        }
         _currentState = stateToSwitchTo;
     }
     void GroundStateConditions(){

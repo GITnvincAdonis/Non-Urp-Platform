@@ -5,6 +5,7 @@ using DG.Tweening;
 [RequireComponent(typeof(CharacterController))]
 public class RocketInstructions : MonoBehaviour
 {
+    [SerializeField] private AudioEventSO _audioSO;
     [SerializeField] GameObject _particles;
     CharacterController controller;
     float Speed;
@@ -16,6 +17,7 @@ public class RocketInstructions : MonoBehaviour
         controller = GetComponent<CharacterController>();
         Speed = 20;
         Destroy(gameObject, 5);
+        _audioSO.RaiseAudioEvent(AudioLibrary.instance._rocketWhistle, transform.position,true, false);
         
     }
     void Start()
@@ -56,6 +58,7 @@ public class RocketInstructions : MonoBehaviour
         }
         GameObject Localparticle = Instantiate(_particles, transform.position, Quaternion.identity);
         Localparticle.GetComponent<ParticleSystem>().Play();
+        _audioSO.RaiseAudioEvent(AudioLibrary.instance._rocketExplosion, transform.position, true, false);
 
     }
     private void OnControllerColliderHit(ControllerColliderHit hit)

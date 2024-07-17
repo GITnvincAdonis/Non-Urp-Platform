@@ -19,13 +19,17 @@ public class LEVELSelect : MonoBehaviour
     [SerializeField] private LvlSwitchSO lvlEvents;
     VisualElement root;
     [SerializeField] private UIDocument _document;
+
+
+    [SerializeField] Texture2D[] texture2Ds;
     // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
        
         StartCoroutine(GenerateMenuSelect());
-        
     }
+     
+    
     private void OnValidate()
     {
         if(Application.isPlaying)return;
@@ -53,6 +57,7 @@ public class LEVELSelect : MonoBehaviour
             text.AddToClassList("text-" + (i + 1));
 
             levelContainers[i] = createElement("levels", "level-" + i);
+            levelContainers[i].style.backgroundImage = texture2Ds[i];
             
 
             levelContainers[i].Insert(0, text);
@@ -83,12 +88,13 @@ public class LEVELSelect : MonoBehaviour
 
 
         
-        if (i==0) lvlEvents.RoomEventRaiser();
-        if (i== 1) lvlEvents.LevelTwoEventRaiser();
-        if (i==2) lvlEvents.LevelTwoEventRaiser();
-        if (i==3) lvlEvents.LevelOneEventRaiser();
+        if (i==0) lvlEvents.LevelOneEventRaiser();
+        if (i== 1) lvlEvents.LevelOneEventRaiser();
+        if (i==2) lvlEvents.LevelOneEventRaiser();
+        if (i==3) lvlEvents.LevelTwoEventRaiser();
+        if (i==4) lvlEvents.RoomEventRaiser();
         //else lvlEvents.LevelOneEventRaiser();
-        
+
     }
     async Task delay()
     {

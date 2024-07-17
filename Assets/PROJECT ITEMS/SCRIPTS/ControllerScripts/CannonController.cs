@@ -12,6 +12,7 @@ using UnityEngine.AI;
 
 public class CannonController : MonoBehaviour, IAttachable
 {
+    [SerializeField] private AudioEventSO _audioSO;
     [SerializeField] private float rotationStep;
     [SerializeField] CannonMoveRelay _moveRelay;
     [SerializeField] LineRenderer _Line;
@@ -22,6 +23,7 @@ public class CannonController : MonoBehaviour, IAttachable
     bool activatedQuestion = false;
     Vector3 pos;
     Task projectileTask;
+    Task cannonSoundDelay;
     public float tempAng;
     public float YAngle;
     Vector3 Direction;
@@ -54,12 +56,18 @@ public class CannonController : MonoBehaviour, IAttachable
             Quaternion currentRotation = transform.rotation;
             Quaternion targetRotation = Quaternion.LookRotation(Direction);
 
-
+           
 
         }
         if (!activatedQuestion) {
             Debug.Log("out");
         }
+    }
+    async Task cannonMoveSondDelay()
+    {
+        _audioSO.RaiseAudioEvent(AudioLibrary.instance._cannonMove,transform.position, false, false);
+        await Task.Delay(300);
+        cannonSoundDelay = null;
     }
 
     private void FixedUpdate()
@@ -70,16 +78,24 @@ public class CannonController : MonoBehaviour, IAttachable
             YAngle += Input.GetAxis("Horizontal") * 0.2f;
             if (Input.GetKey(KeyCode.LeftShift))
             {
-                positionMultiplier += Time.deltaTime * 9f;
+                positionMultiplier += Time.deltaTime * 3f;
             }
             else
             {
-                positionMultiplier -= Time.deltaTime * 7f;
+                positionMultiplier -= Time.deltaTime * 2f;
             }
-            positionMultiplier = Mathf.Clamp(positionMultiplier, 0, 20);
+            positionMultiplier = Mathf.Clamp(positionMultiplier, 0, 5);
             tempAng = Mathf.Clamp(tempAng, 20, 80);
             float angle = tempAng * Mathf.Deg2Rad;
             transform.rotation = Quaternion.Euler(-tempAng + 20, YAngle, transform.rotation.eulerAngles.z);
+            if (!(Input.GetAxis("Vertical") == 0 && Input.GetAxis("Horizontal") == 0))
+            {
+                if (cannonSoundDelay == null)
+                {
+                    cannonSoundDelay = cannonMoveSondDelay();
+                }
+
+            }
         }
     }
 
@@ -95,6 +111,8 @@ public class CannonController : MonoBehaviour, IAttachable
             StopAllCoroutines();
             StartCoroutine(CoroutineMovement(groundDir.normalized, v0, angle, time));
             activatedQuestion = false;
+            _audioSO.RaiseAudioEvent(AudioLibrary.instance._cannonFire,transform.position, true, false);
+
         }
 
     }
@@ -191,7 +209,7 @@ public class CannonController : MonoBehaviour, IAttachable
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.black;
-        for (int i = 0; i < 10; i++) { 
+        for (int i = 0; i < Mathf.Ceil(positionMultiplier); i++) { 
             Gizmos.DrawSphere(transform.position + transform.forward * (1 + i), .3f );
 
         }

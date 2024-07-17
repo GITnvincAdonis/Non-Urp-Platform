@@ -9,14 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d74b60f902c888b4ea3ed6711c31201c, type: 3}
-  m_Name: SecondPlatTimer
+  m_Script: {fileID: 11500000, guid: b1ef9908a3a00e94da17d1afb528fdbc, type: 3}
+  m_Name: AudioSO
   m_EditorClassIdentifier: 
-  StartTimerEvent:
+  playAudioEvent:
     m_PersistentCalls:
       m_Calls: []
-  StopTimerEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  TImer: 10
-  listeners: []
+  playAudioClip: {fileID: 0}
+  position: {x: 0, y: 0, z: 0}
