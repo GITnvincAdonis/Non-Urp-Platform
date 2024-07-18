@@ -1,0 +1,39 @@
+ :root{
+
+	transition-duration: 200ms;
+
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	padding: 200px;
+background-color: rgb(132, 123, 255);
+	
+	
+
+}
+.visible{
+	background-color: rgb(132, 123, 255);
+}
+.container{
+	transition-duration:60ms;
+	margin: 3px;
+	height: 50px;
+	width: 300px;
+	border-width: 2px;
+
+	
+}
+.container-1{
+	margin-bottom: 50px;
+}
+.container-2,.container-3{
+	border-color: black;
+	border-radius: 4px;
+	}
+.container-2:hover,.container-3:hover{
+	scale: 1.06;
+}
+.introText{
+	font-size: 60px;
+	color: white;
+}

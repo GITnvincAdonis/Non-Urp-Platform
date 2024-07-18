@@ -70,7 +70,7 @@
 	margin:290px 5px 40px 9px;
 
 	border-width: 3px;
-	background-overflow: ellipsis;
+	
 	background-position: center;
 	
 	height: 140px;

@@ -36,6 +36,7 @@ public class TakeDamage : MonoBehaviour, IDamagable
     }
     public void TakeHurt()
     {
+        audioEvent.RaiseAudioEvent(AudioLibrary.instance._hurt, transform.position, false, false);
         if (damagableType == DamageableType.Player)
         {
             healthRef.ReduceHealth(35);
@@ -52,7 +53,7 @@ public class TakeDamage : MonoBehaviour, IDamagable
             uiObject.ChangeHealthBar((int)health);
             CinemachineImpulseSource.GenerateImpulseWithForce(3);
             damageEvent.RaiseDamageEvent();
-            audioEvent.RaiseAudioEvent(AudioLibrary.instance._hurt,transform.position, false, false); 
+            
         }
     }
     private void OnEnable()

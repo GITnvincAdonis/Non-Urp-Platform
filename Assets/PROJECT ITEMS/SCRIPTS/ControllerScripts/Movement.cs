@@ -5,6 +5,7 @@ using UnityEngine.InputSystem;
 using DG.Tweening;
 using System.Threading.Tasks;
 using Unity.VisualScripting;
+using DG.Tweening.Core.Easing;
 
 
 enum States
@@ -51,7 +52,7 @@ public class Movement : MonoBehaviour
     [SerializeField] private float _NormalGravity;
     [SerializeField] private float _initialVelocity;
     [SerializeField] private float _maxJumpHeight;
-    [SerializeField] private float _moveMentSpeed;
+    [SerializeField] public float _moveMentSpeed;
     [SerializeField] private float _moveMentSpeedincrement;
     [SerializeField] private float _turnFactor;
     [SerializeField] private float _slideTurnFactor;
@@ -395,11 +396,29 @@ public class Movement : MonoBehaviour
     public void ExtennalSpeedEffctor(float speed) { 
         _moveMentSpeed += speed;
     }
+    Coroutine walkRoutine;
+    IEnumerator walkSound() {
+        
+        float waitTime = 1.5f/_moveMentSpeed;
+        Debug.Log(waitTime);
+        if (waitTime < 1) yield return new WaitForSeconds(waitTime);
+        else yield return new WaitForSeconds(2);
+        _audioEventSO.RaiseAudioEventWithVolume(AudioLibrary.instance._walk, transform.position, false, 0.05f);
+        walkRoutine = null;
+    }
 
- 
+    public bool canPlayWalkAudio;
     void FixedUpdate()
     {
-
+        if (_isMoving && _controller.isGrounded && _currentState == States.GroundState)
+        {
+            canPlayWalkAudio = true;
+        }
+        else { 
+            canPlayWalkAudio = false;
+        }
+        float mag = new Vector3(_MoveDestination.x * _moveMentSpeed, 0, _MoveDestination.z * _moveMentSpeed).magnitude;
+        
         float blendFactor = Mathf.Clamp((_moveMentSpeed), 0.0f, 15f);
         //Debug.Log(blendFactor);
         _animator.SetFloat("Blend", blendFactor);

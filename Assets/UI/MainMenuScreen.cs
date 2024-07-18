@@ -216,16 +216,18 @@ public class MainMenuScreen : MonoBehaviour
     private void ChangeBoxOne(Texture2D src)
     {
         VisualElement image = new();
+        image.style.unityBackgroundScaleMode = ScaleMode.ScaleAndCrop;
         image.style.backgroundImage = src;
-        image.style.width = 140;
+        image.style.width = 240;
         image.style.height = 140;
         containers[0].Insert(0, image);
     }
     private void ChangeBoxTwo(Texture2D scr)
     {
         VisualElement image = new();
+        image.style.unityBackgroundScaleMode = ScaleMode.ScaleAndCrop;
         image.style.backgroundImage = scr;
-        image.style.width = 140;
+        image.style.width = 240;
         image.style.height = 140;
         containers[1].Insert(0, image);
     }
@@ -233,8 +235,9 @@ public class MainMenuScreen : MonoBehaviour
     {
        
         VisualElement image = new();
+        image.style.unityBackgroundScaleMode = ScaleMode.ScaleAndCrop;
         image.style.backgroundImage = scr;
-        image.style.width = 140;
+        image.style.width = 240;
         image.style.height = 140;
         containers[2].Insert(0, image);
     }

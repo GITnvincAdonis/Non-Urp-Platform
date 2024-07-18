@@ -18,6 +18,7 @@ public class AudioLibrary : MonoBehaviour
     [SerializeField] public AudioClip _platformCancel;
     [SerializeField] public AudioClip _cannonMove;
     [SerializeField] public AudioClip _timePlatform;
+    [SerializeField] public AudioClip _walk;
     private void Awake()
     {
         if(instance == null)

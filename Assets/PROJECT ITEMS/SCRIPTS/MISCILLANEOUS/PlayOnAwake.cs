@@ -15,7 +15,7 @@ public class PlayOnAwake : MonoBehaviour
     {
         while (true)
         {
-            AudioEventSO.RaiseAudioEvent(AudioLibrary.instance._blowingFan, transform.position, true, true);
+            AudioEventSO.RaiseAudioEvent(AudioLibrary.instance._blowingFan, transform.position, false, true);
             await Task.Delay((int)AudioLibrary.instance._blowingFan.length * 1000);
         }
     }

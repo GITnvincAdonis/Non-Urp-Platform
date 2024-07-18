@@ -6356,7 +6356,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 322741657}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.13413174, y: -0.0000000170509, z: 0.0000000023079227, w: 0.9909635}
+  m_LocalRotation: {x: 0.13413174, y: 0.00000001705089, z: -0.0000000023079212, w: 0.9909635}
   m_LocalPosition: {x: 9.35, y: 12.32, z: -18.51}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -12082,6 +12082,7 @@ MonoBehaviour:
   _platformCancel: {fileID: 8300000, guid: 5b3895153769572498640797fb1eb10e, type: 3}
   _cannonMove: {fileID: 8300000, guid: 08c975453b31ae140a9ae5fe885228b7, type: 3}
   _timePlatform: {fileID: 8300000, guid: 744635c0d1e97fb44a7d978886c9f182, type: 3}
+  _walk: {fileID: 8300000, guid: 6c3f0940d1b26db41b9cdbe8a551d5f5, type: 3}
 --- !u!4 &454737795
 Transform:
   m_ObjectHideFlags: 0

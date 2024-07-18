@@ -28,7 +28,7 @@
 	scale: 1.051;
 	-unity-background-image-tint-color:rgba(201,201,201,1);
 
-	background-size: 1100px;
+	background-size: 900px;
 	
 }
 .levels:hover > .text{
@@ -45,10 +45,10 @@
 	
 	border-width: 2px;
 	border-color: black;
-	width:250px;
-	height: 500px;
+	width:200px;
+	height: 300px;
 	-unity-background-scale-mode: scale-to-fit;
-	background-size: 1000px;
+	background-size: 800px;
 	
 }
 

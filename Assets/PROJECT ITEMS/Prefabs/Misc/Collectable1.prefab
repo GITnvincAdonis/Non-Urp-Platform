@@ -123,8 +123,8 @@ MonoBehaviour:
   OffsetSpeed: 2
   DisplacementAmount: 1
   UIreferences: {fileID: 11400000, guid: 113ec21d6d45c1a47968105ace5a7f58, type: 2}
-  image1: {fileID: 2800000, guid: 488faced96de9a3408f9b441cf70d947, type: 3}
-  image2: {fileID: 2800000, guid: 72af68d31c2ac6e4688616b2c831e861, type: 3}
+  image1: {fileID: 2800000, guid: 73346cabe3815724d9fc47c3dd9f6c26, type: 3}
+  image2: {fileID: 2800000, guid: 77942edf53ea436469cf348ff708fa10, type: 3}
   image3: {fileID: 2800000, guid: 9fcbd1dc667048d48ac4e8ba364ffc22, type: 3}
   CollectableNumber: 1
 --- !u!1001 &104945005839678901
