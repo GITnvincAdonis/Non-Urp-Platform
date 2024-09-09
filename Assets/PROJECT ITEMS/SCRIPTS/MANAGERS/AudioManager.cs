@@ -12,7 +12,7 @@ public class AudioManager : MonoBehaviour
         {
             awaitTask = StartDelay();
             AudioSource source = Instantiate(_audioSource, audioPosition, Quaternion.identity);
-            Debug.Log("spawn audio");
+            //Debug.Log("spawn audio");
             if(PlayRelative) source.spatialBlend = 1;
             else source.spatialBlend = 0;
 
@@ -32,7 +32,7 @@ public class AudioManager : MonoBehaviour
         {
             awaitTask = StartDelay();
             AudioSource source = Instantiate(_audioSource, audioPosition, Quaternion.identity);
-            Debug.Log("spawn audio");
+            //Debug.Log("spawn audio");
             if (PlayRelative) source.spatialBlend = 1;
             else source.spatialBlend = 0;
 

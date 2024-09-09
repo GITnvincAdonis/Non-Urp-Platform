@@ -19,7 +19,7 @@ public class TriggerWalkSound : MonoBehaviour
     void Update()
     {
         float dist = Vector3.Distance(transform.position, _transform.position);
-        Debug.Log(dist);
+        //Debug.Log(dist);
         if (Movement.canPlayWalkAudio)
         {
             if (dist <= 0.4f && walkRoutine == null)

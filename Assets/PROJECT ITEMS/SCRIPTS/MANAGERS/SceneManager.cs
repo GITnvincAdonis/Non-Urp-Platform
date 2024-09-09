@@ -45,7 +45,11 @@ public class SceneManagerLocal : MonoBehaviour
 
     public async void WinState()
     {
-
+        UIevents.FadeInEventRaiser();
+        await Task.Delay(1000);
+        //SceneManager
+        scene = SceneManager.LoadSceneAsync("MenuSelect", LoadSceneMode.Single);
+        UIevents.FadeOutEventRaiser();
     }
     AsyncOperation scene;
     

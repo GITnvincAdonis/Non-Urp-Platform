@@ -60,7 +60,7 @@ public class CannonController : MonoBehaviour, IAttachable
 
         }
         if (!activatedQuestion) {
-            Debug.Log("out");
+            //Debug.Log("out");
         }
     }
     async Task cannonMoveSondDelay()

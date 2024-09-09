@@ -13,7 +13,8 @@ public class DRONEController : MonoBehaviour
     {
         idle,
         RestReturn,
-        Attack
+        Attack,
+        Recoil
     }
     [SerializeField] RocketInstructions rockets;
     [SerializeField] private int _MinShootInterval;
@@ -21,8 +22,12 @@ public class DRONEController : MonoBehaviour
     [SerializeField] private float _slerpSpeed;
     [SerializeField] private int _burstCount;
     [SerializeField] private int _playerOffset;
-
-    DroneState _currentState;
+    [SerializeField] private Transform _playerPos;
+    [SerializeField] private DamageEventSO damageEvent;
+    [SerializeField] private ParticleSystem _explosionParticles;
+    [SerializeField] private GameObject _droneMesh;
+    [SerializeField] private AudioEventSO _audioEvent;
+    public DroneState _currentState;
     CharacterController _droneController;
     Vector3 _playerDestination;
 
@@ -105,7 +110,6 @@ public class DRONEController : MonoBehaviour
     {
         await Task.Delay(10);
         float destination = 0;
-        //destination.x = _playerDestination.x - transform.position.x;
        
         destination = _playerOffset + (_playerDestination.y* 0.5f)+ Mathf.Sin(Time.time + 10);
         transform.DOMoveY(destination, 5f).SetEase(Ease.InOutQuad).OnComplete(() =>
@@ -123,7 +127,7 @@ public class DRONEController : MonoBehaviour
     void RestReturnLogic()
     {
 
-
+       
         _playerDestination = _restPosition;
         if (_playerDestination != Vector3.zero)
         {
@@ -153,10 +157,6 @@ public class DRONEController : MonoBehaviour
             Vector3 destination = Vector3.zero;
             destination.y = Mathf.Sin(Time.time + 10);
         }
-        if (_currentState == DroneState.idle)
-        {
-              
-        }
         if (_currentState == DroneState.Attack)
         {
             AttackStateConditions();
@@ -164,35 +164,50 @@ public class DRONEController : MonoBehaviour
             destination.y = Mathf.Sin(Time.time + 10);
            
         }
-        //Debug.Log(_currentState);
+        if (_currentState == DroneState.Recoil)
+        {
+            Vector3 playerPos = _playerPos.position;
+
+            Vector3 direction = transform.position - playerPos;
+            if(recoilTask == null)
+            {
+                recoilTask = RecoilAction(direction.normalized * .1f);
+            }
+            
+            Debug.Log("recoiling");
+        }
         if (_currentState == DroneState.RestReturn) Debug.Log(_playerDestination);
-        //Debug.Log(Vector3.Distance(transform.position, _restPosition));
+        if(Vector3.Distance(transform.position,_playerPos.position) > 35 && (_currentState == DroneState.Attack))
+        {
+                ChangeState(DroneState.RestReturn);
+
+        } if(Vector3.Distance(transform.position,_playerPos.position) < 35 && (_currentState != DroneState.Attack && _currentState != DroneState.Recoil))
+        {   
+                ChangeState(DroneState.Attack);
+        }
+
 
     }
-    private void OnTriggerEnter(Collider other)
+    Task recoilTask = null;
+    async Task RecoilAction(Vector3 direction)
     {
-        Debug.Log(other.gameObject);
-        if (_currentState == DroneState.idle) {
-            // Debug.Log("we in");
-            ChangeState(DroneState.Attack);
-           
-           
-        }
+        transform.DOMove(direction, 7).SetEase(Ease.Linear);
+        
+        await Task.Delay(1400);
+        _explosionParticles.Play();
+        _droneMesh.SetActive(false);
+        _audioEvent.RaiseAudioEventWithVolume(AudioLibrary.instance._rocketExplosion, transform.position, false, .8f);
+        Destroy(gameObject, .5f);
+
+
     }
+
     private void OnTriggerStay(Collider other)
     {
-        _playerDestination = other.transform.position;
+        _playerDestination = _playerPos.position;
     }
-    private void OnTriggerExit(Collider other)
-    {
-        if (LayerMask.LayerToName(other.gameObject.layer) == "PlayerWIreframe")
-        {
-            if (_currentState == DroneState.Attack){
-                ChangeState(DroneState.RestReturn);  
-                _playerDestination = Vector3.zero;
-            }
-            //Debug.Log("we out");
+ 
 
-        }
-    }
+
+
 }

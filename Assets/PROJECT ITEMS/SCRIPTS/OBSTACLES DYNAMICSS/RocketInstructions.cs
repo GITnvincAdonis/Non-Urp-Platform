@@ -48,12 +48,12 @@ public class RocketInstructions : MonoBehaviour
         {
             if (collider2.gameObject.GetComponent<IDamagable>() != null && !collider2.CompareTag("Drone"))
             {
-                Debug.Log("HITTTT");
+                //Debug.Log("HITTTT");
                 collider2.GetComponent<IDamagable>().TakeHurt();
                 break;
             }
             
-            Debug.Log(collider2.name);
+           // Debug.Log(collider2.name);
 
         }
         GameObject Localparticle = Instantiate(_particles, transform.position, Quaternion.identity);
@@ -68,7 +68,7 @@ public class RocketInstructions : MonoBehaviour
         
 
         if (hit.collider.GetComponent<IDamagable>() != null) {
-            Debug.Log("Hit player");
+           // Debug.Log("Hit player");
             
         }
         if (!hit.collider.CompareTag("Drone")) Destroy(gameObject);

@@ -29,7 +29,8 @@ public class IntroScreen : MonoBehaviour
         root.styleSheets.Add(_selectMenuStyles);
 
         Label introLabel = new ();
-
+        Label StartLabel = new ();
+        Label ExitLabel = new ();
 
         VisualElement[] testElement = new VisualElement[3];
         for (int i = 0; i < testElement.Length; i++) {
@@ -40,10 +41,20 @@ public class IntroScreen : MonoBehaviour
 
         }
 
-        introLabel.text = "MY GAME";
+        introLabel.text = "ROBOTO (My Game)";
         introLabel.AddToClassList("introText");
+
+        StartLabel.text = "LEVELS";
+        StartLabel.AddToClassList("startLabel");
+        ExitLabel.text = "QUIT";
+        ExitLabel.AddToClassList("exitLabel");
+
         testElement[0].Add(introLabel);
+        testElement[1].Add(StartLabel);
         testElement[1].RegisterCallback<ClickEvent>(MenuClickEvent);
+
+
+        testElement[2].Add(ExitLabel);
         testElement[2].RegisterCallback<ClickEvent>((Clickable) =>
         {
             Application.Quit(); 

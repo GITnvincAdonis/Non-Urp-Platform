@@ -64,9 +64,8 @@ public class LEVELSelect : MonoBehaviour
             levelContainer.Insert(0, levelContainers[i]);
 
         }
-        levelContainers[0].RegisterCallback<ClickEvent>((ClickEvent) => {clickEvent(0);});
-        levelContainers[1].RegisterCallback<ClickEvent>((ClickEvent) => {clickEvent(1);});
-        levelContainers[2].RegisterCallback<ClickEvent>((ClickEvent) => {clickEvent(2);});
+       
+        
         levelContainers[3].RegisterCallback<ClickEvent>((ClickEvent) => {clickEvent(3);});
         levelContainers[4].RegisterCallback<ClickEvent>((ClickEvent) => {clickEvent(4);});
 

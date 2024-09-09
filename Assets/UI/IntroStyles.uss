@@ -27,6 +27,7 @@ background-color: rgb(132, 123, 255);
 	margin-bottom: 50px;
 }
 .container-2,.container-3{
+	padding-left: 10px;
 	border-color: black;
 	border-radius: 4px;
 	}
@@ -36,4 +37,11 @@ background-color: rgb(132, 123, 255);
 .introText{
 	font-size: 60px;
 	color: white;
+}
+.startLabel{
+	font-size: 30px;
+}
+.exitLabel{
+	font-size: 30px;
+
 }

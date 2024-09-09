@@ -58,10 +58,10 @@ Shader "Custom/SimplestInstancedShader"
                 UNITY_TRANSFER_INSTANCE_ID(v, o);
 
                 float3 pos = GrassBuffer[instanceID].Position;
-                float sinTime = .1*sin(pos.x * 0.03 * _Time.y);
+                float sinTime = 10*sin(pos.x  * _Time.y);
 
-                v.vertex.x += v.uv0.y * sinTime * 0.01;
-                v.vertex.z += v.uv0.y * sinTime * 0.01;
+                v.vertex.x += v.uv0.y * sinTime * 10;
+                v.vertex.z += v.uv0.y * sinTime * 10;
                 o.vertex = UnityObjectToClipPos(v.vertex);
                 o.uv0 = v.uv0;
                 return o;

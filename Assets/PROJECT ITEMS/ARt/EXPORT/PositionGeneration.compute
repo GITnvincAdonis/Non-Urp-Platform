@@ -26,13 +26,13 @@ void CSMain (uint3 id : SV_DispatchThreadID)
         float3 position = 0.0f;
     
         position.xz = (id.xy - float(_Dimension) * 0.5) * (2.0f / float(_scale));
-        position.x += snoise(float3(position.xz, 0.0f) * 15.0f) * 9;
-        position.z += snoise(float3(position.xz, 0.0f) * 10.0f) * 3;
+        position.x += snoise(float3(position.xz, 0.0f) * 15.0f) * 10;
+        position.z += snoise(float3(position.xz, 0.0f) * 10.0f) * 4;
         
         
-        float localYRot = snoise(float3(position.xz, 0.0f) * 4.0f) * 050;
+        float localYRot = snoise(float3(position.xz, 40) * 40.0f) * 0500;
         tempStruct.Position = position;
-        tempStruct.Rotation = float3(1, -16 * localYRot, 10);
+        tempStruct.Rotation = float3(1, -1 * localYRot, 10);
         tempStruct.Scale = max(snoise(float3(position.xz, 0.0f) * .10f) * _maxScale , _minScale);
         positionBuffer[id.x + id.y * _Dimension] = tempStruct;
     }

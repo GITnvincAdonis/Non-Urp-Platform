@@ -37,6 +37,7 @@ public class Collectables : MonoBehaviour
     
     private void OnTriggerEnter(Collider other)
     {
+        Debug.Log(other.name);
         if(CollectableNumber ==1) UIreferences.ChangeContOneEventRaiser(image1);  
         if(CollectableNumber ==2) UIreferences.ChangeContTwoEventRaiser(image2);
         if(CollectableNumber ==3) UIreferences.ChangeContThreeEventRaiser(image3);
