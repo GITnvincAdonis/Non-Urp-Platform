@@ -130,7 +130,8 @@ public class PlatformScript : MonoBehaviour
     }
     private void OnTriggerExit(Collider other)
     {
-        if(BehaviourType == PlatformBehaviour.oneWay && (LayerMask.LayerToName(other.gameObject.layer) == "PlayerWIreframe")) collider.enabled = false;
+        Debug.Log(other.name);
+        collider.enabled = false;
     }
     private void OnTriggerStay(Collider other)
     {

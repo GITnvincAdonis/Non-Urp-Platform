@@ -17,9 +17,9 @@ public class Collectables : MonoBehaviour
     DG.Tweening.Tween _rotateTween;
     void Start()
     {
-        
-        
-        _moveTween = transform.DOLocalMoveY(transform.position.y + DisplacementAmount,OffsetSpeed).SetEase(Ease.InOutCubic).SetLoops(-1,LoopType.Yoyo);
+
+        float yPos = transform.position.y;
+        _moveTween = transform.DOLocalMoveY( yPos + DisplacementAmount,OffsetSpeed).SetEase(Ease.InOutCubic).SetLoops(-1,LoopType.Yoyo);
         _rotateTween = transform.DORotate(new Vector3(0,360,0),RotationSpeed,RotateMode.FastBeyond360).SetEase(Ease.Linear).SetLoops(-1);
         
     }

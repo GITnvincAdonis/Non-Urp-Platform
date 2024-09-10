@@ -23,10 +23,17 @@ public class DRONEController : MonoBehaviour
     [SerializeField] private int _burstCount;
     [SerializeField] private int _playerOffset;
     [SerializeField] private Transform _playerPos;
-    [SerializeField] private ScreenShakeSO screenShakeSO;
     [SerializeField] private ParticleSystem _explosionParticles;
     [SerializeField] private GameObject _droneMesh;
+
+
+
     [SerializeField] private AudioEventSO _audioEvent;
+    [SerializeField] private ScreenShakeSO screenShakeSO;
+    [SerializeField] private CollectableSO CollectableSO;
+
+
+
     public DroneState _currentState;
     CharacterController _droneController;
     Vector3 _playerDestination;
@@ -197,6 +204,7 @@ public class DRONEController : MonoBehaviour
         await Task.Delay(1400);
         _explosionParticles.Play();
         _droneMesh.SetActive(false);
+        CollectableSO.IncrementCollectable();
         _audioEvent.RaiseAudioEventWithVolume(AudioLibrary.instance._rocketExplosion, transform.position, false, .8f);
         Destroy(gameObject, .5f);
 

@@ -5575,10 +5575,11 @@ MonoBehaviour:
   _burstCount: 2
   _playerOffset: 7
   _playerPos: {fileID: 0}
-  screenShakeSO: {fileID: 11400000, guid: 234fc8ec60e32a54a9994d87091cacbb, type: 2}
   _explosionParticles: {fileID: 5229867448100027250}
   _droneMesh: {fileID: 6078323706095564746}
   _audioEvent: {fileID: 11400000, guid: 4d49d841226542341a2303969e240ebc, type: 2}
+  screenShakeSO: {fileID: 11400000, guid: 234fc8ec60e32a54a9994d87091cacbb, type: 2}
+  CollectableSO: {fileID: 11400000, guid: 91283f0144cd8a24684d35daac77f9f8, type: 2}
   _currentState: 0
 --- !u!143 &6120347768153647719
 CharacterController:
