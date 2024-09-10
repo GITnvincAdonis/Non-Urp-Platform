@@ -14,6 +14,7 @@ struct GrassData
 RWStructuredBuffer<GrassData> positionBuffer;
 RWTexture2D<float4> Result;
 int _Dimension,_scale,_maxScale,_minScale;
+float _heightNoiseScale;
 
 
 [numthreads(8,8,1)]
@@ -30,10 +31,11 @@ void CSMain (uint3 id : SV_DispatchThreadID)
         position.z += snoise(float3(position.xz, 0.0f) * 10.0f) * 4;
         
         
-        float localYRot = snoise(float3(position.xz, 40) * 40.0f) * 0500;
+        float localYRot = snoise(float3(position.xz, 40) * 50.0f) * 500.0f;
         tempStruct.Position = position;
-        tempStruct.Rotation = float3(1, -1 * localYRot, 10);
-        tempStruct.Scale = max(snoise(float3(position.xz, 0.0f) * .10f) * _maxScale , _minScale);
+        tempStruct.Rotation = float3(1, -1 * localYRot, 1.0f);
+        float variedScale = snoise(float3(position.xz, 0.0f) * _heightNoiseScale);
+        tempStruct.Scale = max(variedScale * _maxScale , _minScale );
         positionBuffer[id.x + id.y * _Dimension] = tempStruct;
     }
     

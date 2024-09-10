@@ -5573,9 +5573,9 @@ MonoBehaviour:
   _MaxShootInterval: 9
   _slerpSpeed: 0.1
   _burstCount: 2
-  _playerOffset: 6
+  _playerOffset: 7
   _playerPos: {fileID: 0}
-  damageEvent: {fileID: 0}
+  screenShakeSO: {fileID: 11400000, guid: 234fc8ec60e32a54a9994d87091cacbb, type: 2}
   _explosionParticles: {fileID: 5229867448100027250}
   _droneMesh: {fileID: 6078323706095564746}
   _audioEvent: {fileID: 11400000, guid: 4d49d841226542341a2303969e240ebc, type: 2}
@@ -5619,7 +5619,7 @@ SphereCollider:
     m_Bits: 64
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 951
+    m_Bits: 1975
   m_LayerOverridePriority: 0
   m_IsTrigger: 1
   m_ProvidesContacts: 1

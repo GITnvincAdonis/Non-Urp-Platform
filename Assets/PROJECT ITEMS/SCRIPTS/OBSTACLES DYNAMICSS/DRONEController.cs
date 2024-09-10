@@ -23,7 +23,7 @@ public class DRONEController : MonoBehaviour
     [SerializeField] private int _burstCount;
     [SerializeField] private int _playerOffset;
     [SerializeField] private Transform _playerPos;
-    [SerializeField] private DamageEventSO damageEvent;
+    [SerializeField] private ScreenShakeSO screenShakeSO;
     [SerializeField] private ParticleSystem _explosionParticles;
     [SerializeField] private GameObject _droneMesh;
     [SerializeField] private AudioEventSO _audioEvent;
@@ -191,6 +191,7 @@ public class DRONEController : MonoBehaviour
     Task recoilTask = null;
     async Task RecoilAction(Vector3 direction)
     {
+        screenShakeSO.TriggerScreenShake();
         transform.DOMove(direction, 7).SetEase(Ease.Linear);
         
         await Task.Delay(1400);

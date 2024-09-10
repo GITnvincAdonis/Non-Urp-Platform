@@ -4,7 +4,7 @@ using UnityEngine;
 using DG.Tweening;
 using System.Threading.Tasks;
 using Unity.Loading;
-using Cinemachine;
+
 using TreeEditor;
 
 
@@ -27,11 +27,12 @@ public class TakeDamage : MonoBehaviour, IDamagable
     [SerializeField] private AudioEventSO audioEvent;
 
     [SerializeField] private DamageEventSO damageEvent;
-    CinemachineImpulseSource CinemachineImpulseSource;
+    [SerializeField] private ScreenShakeSO screenShake;
+   
 
     private void Awake()
     {
-        CinemachineImpulseSource = GetComponent<CinemachineImpulseSource>();
+       
        
     }
     public void TakeHurt()
@@ -51,7 +52,7 @@ public class TakeDamage : MonoBehaviour, IDamagable
             
             Debug.Log(health);
             uiObject.ChangeHealthBar((int)health);
-            CinemachineImpulseSource.GenerateImpulseWithForce(3);
+            screenShake.TriggerScreenShake();
             damageEvent.RaiseDamageEvent();
             
         }
