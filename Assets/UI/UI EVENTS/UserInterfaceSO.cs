@@ -84,6 +84,10 @@ public class UserInterfaceSO : ScriptableObject
         healthAmount = health;
         UpdateHealthBarEvent.Invoke(healthAmount);
     }
+    public void Resethealth()
+    {
+        healthAmount = 100;
+    }
     public void ChangeSpeedBar(float speed, float x, float y, float z) {
         position[0] = x;
         position[1] = y;

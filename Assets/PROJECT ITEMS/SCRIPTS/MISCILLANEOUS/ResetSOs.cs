@@ -2,11 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class IncrementCollectableCount : MonoBehaviour
+public class ResetSOs : MonoBehaviour
 {
+    [SerializeField] CollectableSO SO1;
+[SerializeField] CollectableSO SO2;
+    [SerializeField] CollectableSO SO3;
 
     // Start is called before the first frame update
-    [SerializeField] private CollectableSO CollectableSO;
     void Start()
     {
         
@@ -17,12 +19,10 @@ public class IncrementCollectableCount : MonoBehaviour
     {
         
     }
-    private void OnTriggerEnter(Collider other)
-    {
-        CollectableSO.IncrementCollectable();
-    }
     private void OnDisable()
     {
-        CollectableSO.ResetCollectables();
+        SO1.ResetCollectables();
+        SO2.ResetCollectables();
+        SO3.ResetCollectables();
     }
 }

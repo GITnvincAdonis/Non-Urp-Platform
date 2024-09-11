@@ -565,6 +565,7 @@ public class Movement : MonoBehaviour
     }
     private void OnDisable()
     {
+        _userInterface.Resethealth();
         _CannonMoveRelay.CannonPathCoords.RemoveListener(AcceptCannonPathCoord);
         _inputActions.MOVES.Disable();
         _inputActions.UI.Disable();

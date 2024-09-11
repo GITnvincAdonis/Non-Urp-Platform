@@ -30,4 +30,8 @@ public class CollectableSO : ScriptableObject
     public void CompletedEvent() { 
         CollectableEvent.Invoke();
     }
+    public void ResetCollectables()
+    {
+        collectableCount = 0;
+    }
 }
