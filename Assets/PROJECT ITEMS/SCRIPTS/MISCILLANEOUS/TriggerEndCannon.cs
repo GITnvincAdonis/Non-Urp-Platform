@@ -17,11 +17,15 @@ public class TriggerEndCannon : MonoBehaviour
     {
         
     }
-    void ActivateCannon()
+    void ActivateCannon(int value)
     {
-        cannon.SetActive(true);
+        if (value == 3)
+        {
+            cannon.SetActive(true);
+
+        }
     }
-    private void OnEnable()
+        private void OnEnable()
     {
         collectableSOObject.CollectableEvent.AddListener(ActivateCannon);
     }

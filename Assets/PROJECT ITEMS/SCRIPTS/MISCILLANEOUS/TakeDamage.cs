@@ -5,7 +5,6 @@ using DG.Tweening;
 using System.Threading.Tasks;
 using Unity.Loading;
 
-using TreeEditor;
 
 
 public class TakeDamage : MonoBehaviour, IDamagable

@@ -11,27 +11,27 @@ public class CollectableSO : ScriptableObject
     // Start is called before the first frame update
    
     public int collectableCount = 0;
-    public UnityEvent CollectableEvent = new();
+    public UnityEvent<int> CollectableEvent = new();
     private void OnEnable()
     {
-        collectableCount = 0;
+       collectableCount = 0;
         if (CollectableEvent == null)
         {
-            CollectableEvent= new UnityEvent();
+            CollectableEvent= new ();
         }
     }
 
     public void IncrementCollectable()
     {
         collectableCount++;
-        if (collectableCount > 2) CompletedEvent();
+        CollectableEvent.Invoke(collectableCount);
+        
     }
 
-    public void CompletedEvent() { 
-        CollectableEvent.Invoke();
-    }
+ 
     public void ResetCollectables()
     {
         collectableCount = 0;
+        CollectableEvent.Invoke(collectableCount);
     }
 }

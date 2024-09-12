@@ -20,14 +20,18 @@ public class OnEnableTest : MonoBehaviour
     {
         
     }
-    async void StartMovement()
+    async void StartMovement(int value)
     {
-        points[0] = point1.position;
-        points[1] = point2.position;
-        points[2] = point3.position;
-        Sequence sequence = DOTween.Sequence();
-        sequence.Append(transform.DOPath(points, 1, PathType.CubicBezier).SetEase(Ease.InOutSine));
-        sequence.Append(transform.DOLocalMoveY(transform.position.y -1, 4).SetEase(Ease.OutBounce));
+        if (value == 3)
+        {
+            points[0] = point1.position;
+            points[1] = point2.position;
+            points[2] = point3.position;
+            Sequence sequence = DOTween.Sequence();
+            sequence.Append(transform.DOPath(points, 1, PathType.CubicBezier).SetEase(Ease.InOutSine));
+            sequence.Append(transform.DOLocalMoveY(transform.position.y - 1, 4).SetEase(Ease.OutBounce));
+        }
+       
       
     }
     private void OnEnable()

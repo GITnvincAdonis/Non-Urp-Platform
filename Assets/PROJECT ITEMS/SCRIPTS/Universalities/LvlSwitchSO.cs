@@ -22,7 +22,7 @@ public class LvlSwitchSO : ScriptableObject
     Dictionary<SceneName, string> names = new Dictionary<SceneName, string>
     {
         { SceneName.MenuSelect, "MenuSelect" },
-        { SceneName.homeScreen, "HomeScreen" },
+        { SceneName.homeScreen, "IntroScreen" },
         { SceneName.LevelOne, "LevelOne"},
         { SceneName.Room, "Room" },
         {SceneName.LVL2, "LVL2" },

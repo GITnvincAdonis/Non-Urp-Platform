@@ -21,6 +21,7 @@ public class MainMenuScreen : MonoBehaviour
     [SerializeField] private MenuState state;
     [SerializeField] private UserInterfaceSO UIEvents;
     [SerializeField] private LvlSwitchSO lvlEvents;
+    [SerializeField] private WinConditionSO winConditionSO;
     [SerializeField] private HealthSOScript healthRef;
     VisualElement root;
     [SerializeField] private UIDocument _document;
@@ -44,6 +45,7 @@ public class MainMenuScreen : MonoBehaviour
     [SerializeField] private Texture2D CollectableTwo;
     [SerializeField] private Texture2D CollectableThree;
 
+
     Texture2D[] collectables = new Texture2D[3];
 
 
@@ -64,7 +66,7 @@ public class MainMenuScreen : MonoBehaviour
     // pause UI references
 
     [SerializeField] private StyleSheet _pauseMenuStyles;
-    VisualElement[] optionContainers = new VisualElement[5];
+    VisualElement[] optionContainers = new VisualElement[2];
     string[] optiontext = new string[5];
     VisualElement item;
 
@@ -86,11 +88,9 @@ public class MainMenuScreen : MonoBehaviour
 
 
 
-        optiontext[0] = "Return";
-        optiontext[1] = "Restart";
-        optiontext[2] = "Home";
-        optiontext[3] = "levels";
-        optiontext[4] = "seetings";
+        optiontext[0] = "Levels";
+        optiontext[1] = "Home";
+       
         state = MenuState.LevelScreen;
     }
     private void Start()
@@ -293,28 +293,54 @@ public class MainMenuScreen : MonoBehaviour
             text.AddToClassList("text");
             text.text = optiontext[i];
             optionContainers[i].Insert(0, text);
-            optionContainers[i].RegisterCallback<ClickEvent>(MenuClickEvent);
+            
             optionMegaContainer.Insert(0,optionContainers[i]);
 
         }
-        VisualElement renderTextureContainter = createElement("render-texture");  
+        optionContainers[0].RegisterCallback<ClickEvent>((ClickEvent) => { MenuClickEvent(0); });
+        optionContainers[1].RegisterCallback<ClickEvent>((ClickEvent) => { MenuClickEvent(1); });
+       
+       
+
+
+  
         item.Insert(0, optionMegaContainer);
-        item.Insert(1, renderTextureContainter);
+      
         root.Add(item);
     }
-
-    void MenuClickEvent(ClickEvent evt)
+    Texture2D toTexture2D(RenderTexture rTex)
     {
-        MyDelay();
+        Texture2D tex = new Texture2D(512, 512, TextureFormat.RGB24, false);
+        // ReadPixels looks at the active RenderTexture.
+        RenderTexture.active = rTex;
+        tex.ReadPixels(new Rect(0, 0, rTex.width, rTex.height), 0, 0);
+        tex.Apply();
+        return tex;
+    }
+    void MenuClickEvent(int boxNumber)
+    {
+        Debug.Log(boxNumber);
+        MyDelay(boxNumber);
         Debug.Log("clicked");
     }
-    async Task MyDelay()
+    async Task MyDelay(int num)
     {
-
+        
         if (Lvl != lvlEvents.gameSceneToSwitchTo) UIEvents.FadeInEventRaiser();
         await Task.Delay(1000);
         Debug.Log("left");
-        lvlEvents.MenuSelectEventRaiser();
+        switch(num)
+        {   case 0:
+                lvlEvents.MenuSelectEventRaiser();
+                return;
+           
+            case 1:
+                lvlEvents.HomeScreenEventRaiser();
+                return;
+            
+          
+        }
+        
     }
 
 

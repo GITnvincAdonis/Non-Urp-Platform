@@ -31,9 +31,9 @@
 }
 .mega-Image-Container{
 	
-	width: 600px;
+	width: 300px;
 	display:flex;
-	flex-direction: row;
+	flex-direction: column;
 	flex-wrap: wrap ;
 	
 }
@@ -43,7 +43,7 @@
 	display: flex;
 	justify-content: flex-end;
 	margin: 5px;
-	height: 180px;
+	height: 70px;
 	width: 180px;
 	border-width: 2px;
 	border-color: black;
@@ -51,6 +51,7 @@
 	
 	
 }
+
 .render-texture{
 	border-width: 2px;
 	border-color: black;
@@ -61,7 +62,7 @@
 	
 }
 .option-container-0,.option-container-1{
-	height: 100px;
+	height: 40px;
 	width:275px;
 	
 	
@@ -79,4 +80,8 @@
 	scale: 1.02;
 	opacity: 0.6;
 	background-color: black;
+}
+.render-texture{
+	-unity-background-scale-mode: scale-to-fit;
+	background-size: 1300px;
 }

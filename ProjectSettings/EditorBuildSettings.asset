@@ -6,15 +6,15 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/LevelOne.unity
-    guid: 99c9720ab356a0642a771bea13969a05
-  - enabled: 1
-    path: Assets/Scenes/Mocks/LVL2.unity
-    guid: 608208a8ff92c694088586e87a23651d
+    path: Assets/Scenes/IntroScreen.unity
+    guid: 44e37c4931d281948b2eda4222aa4231
   - enabled: 1
     path: Assets/Scenes/MenuSelect.unity
     guid: 2e28a3dadb50e0a41a8f50265f1de3e2
   - enabled: 1
     path: Assets/Scenes/Mocks/Room.unity
     guid: 9686a8dd7c00d604184e5751f33194fd
+  - enabled: 1
+    path: Assets/Scenes/Mocks/LVL2.unity
+    guid: 608208a8ff92c694088586e87a23651d
   m_configObjects: {}

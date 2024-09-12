@@ -43,6 +43,7 @@ public class MenuManager : MonoBehaviour
     }
     private void OnEnable()
     {
+
         input.MOVES.Enable();
         input.UI.Enable();
     }

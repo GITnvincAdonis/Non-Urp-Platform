@@ -5,8 +5,8 @@ using UnityEngine;
 public class PauseManager : MonoBehaviour
 {
     public static PauseManager instance;
-    
-    public bool IsPaused {  get; private set; }
+
+    [SerializeField] public bool IsPaused;
 
     private void Awake()
     {

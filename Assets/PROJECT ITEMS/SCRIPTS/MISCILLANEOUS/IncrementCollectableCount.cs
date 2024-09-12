@@ -21,8 +21,5 @@ public class IncrementCollectableCount : MonoBehaviour
     {
         CollectableSO.IncrementCollectable();
     }
-    private void OnDisable()
-    {
-        CollectableSO.ResetCollectables();
-    }
+   
 }

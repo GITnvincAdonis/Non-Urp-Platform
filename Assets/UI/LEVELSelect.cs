@@ -135,7 +135,7 @@ public class LEVELSelect : MonoBehaviour
     }
     private void OnEnable()
     {
-
+        Debug.Log("Time scale in Menu select"+Time.timeScale);
         lvlEvents.switchedEvent.AddListener(retrieveLvl);
 
         UIEvents.fadeInEvent.AddListener(FadeToBlack);

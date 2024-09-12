@@ -18,8 +18,9 @@ public class TriggerWinEvent : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-
+       
         winConSO.RaiseWinEvent();
         
+
     }
 }

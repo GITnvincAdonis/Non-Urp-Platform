@@ -12,8 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67b85225eaffd6540b190c56d0088519, type: 3}
   m_Name: CollectableSO
   m_EditorClassIdentifier: 
-  CompletedAll: 0
-  collectableCount: 0
-  CheckCollectableStatus:
+  collectableCount: 3
+  CollectableEvent:
     m_PersistentCalls:
       m_Calls: []

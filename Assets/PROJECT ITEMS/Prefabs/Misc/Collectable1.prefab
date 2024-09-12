@@ -13,7 +13,8 @@ GameObject:
   - component: {fileID: 1340519106648051433}
   - component: {fileID: 5547900921520338983}
   - component: {fileID: 4416693005843425637}
-  m_Layer: 5
+  - component: {fileID: 7145771740014752143}
+  m_Layer: 11
   m_Name: Collectable1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -28,7 +29,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4184914010109537236}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -4.2700043, y: 29.107, z: -5.4300003}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -96,12 +97,12 @@ BoxCollider:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 55
+    m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -123,10 +124,23 @@ MonoBehaviour:
   OffsetSpeed: 2
   DisplacementAmount: 1
   UIreferences: {fileID: 11400000, guid: 113ec21d6d45c1a47968105ace5a7f58, type: 2}
-  image1: {fileID: 2800000, guid: 73346cabe3815724d9fc47c3dd9f6c26, type: 3}
-  image2: {fileID: 2800000, guid: 77942edf53ea436469cf348ff708fa10, type: 3}
-  image3: {fileID: 2800000, guid: 9fcbd1dc667048d48ac4e8ba364ffc22, type: 3}
+  image1: {fileID: 2800000, guid: a7f59e54a47a3ec49add90ea13ab3cca, type: 3}
+  image2: {fileID: 2800000, guid: 961e6de08da0dd842a6dc450dc4b2eb1, type: 3}
+  image3: {fileID: 2800000, guid: c43db004a7b20334281fdd770309ce8a, type: 3}
   CollectableNumber: 1
+--- !u!114 &7145771740014752143
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4184914010109537236}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 095d2e80fb7bbe045b3622ba3c67e689, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollectableSO: {fileID: 11400000, guid: 5ac4d8e52541d50428465c23a50838fa, type: 2}
 --- !u!1001 &8902014839449022245
 PrefabInstance:
   m_ObjectHideFlags: 0
