@@ -35,6 +35,12 @@ public class CannonController : MonoBehaviour, IAttachable
         cannonControls.CannonControls.WASD.started += RotationEnabled;
         cannonControls.CannonControls.WASD.performed += RotationEnabled;
         cannonControls.CannonControls.WASD.canceled += RotationEnabled;
+
+        cannonControls.CannonControls.Cancel.started += CancelEnabled;
+        cannonControls.CannonControls.Cancel.performed += CancelEnabled;
+        cannonControls.CannonControls.Cancel.canceled += CancelEnabled;
+
+
         cannonControls.CannonControls.Release.started += ReleaseEnabled;
         cannonControls.CannonControls.Release.performed += ReleaseEnabled;
         cannonControls.CannonControls.Release.canceled += ReleaseEnabled;
@@ -63,6 +69,9 @@ public class CannonController : MonoBehaviour, IAttachable
             //Debug.Log("out");
         }
     }
+    void CancelEnabled(InputAction.CallbackContext ctx) { 
+        activatedQuestion = false;
+    }
     async Task cannonMoveSondDelay()
     {
         _audioSO.RaiseAudioEvent(AudioLibrary.instance._cannonMove,transform.position, false, false);
@@ -70,6 +79,7 @@ public class CannonController : MonoBehaviour, IAttachable
         cannonSoundDelay = null;
     }
 
+    [SerializeField] private Material gizmosMaterial;
     private void FixedUpdate()
     {
         if (activatedQuestion)
@@ -96,6 +106,19 @@ public class CannonController : MonoBehaviour, IAttachable
                 }
 
             }
+        }
+        for (int i = 0; i < Mathf.Ceil(positionMultiplier); i++)
+        {
+            GameObject sphere1 = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+            sphere1.transform.localScale = new Vector3(.8f, .8f, .8f);
+            sphere1.GetComponent<MeshRenderer>().material = gizmosMaterial;
+            sphere1.GetComponent<SphereCollider>().enabled = false;
+            sphere1.transform.position = transform.position + transform.forward * (1 + i);
+            Destroy(sphere1,.01f);
+
+            
+           
+
         }
     }
 
@@ -209,10 +232,7 @@ public class CannonController : MonoBehaviour, IAttachable
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.black;
-        for (int i = 0; i < Mathf.Ceil(positionMultiplier); i++) { 
-            Gizmos.DrawSphere(transform.position + transform.forward * (1 + i), .3f );
-
-        }
+       
     }
 
 }

@@ -44,6 +44,15 @@ public partial class @CANNON: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Cancel"",
+                    ""type"": ""Button"",
+                    ""id"": ""0ef914ab-9b55-49a5-b2c3-bbaa4d8c83f9"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -112,6 +121,17 @@ public partial class @CANNON: IInputActionCollection2, IDisposable
                     ""action"": ""Release"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0db8c535-1fae-498d-b96c-e0774788cb06"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Cancel"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -122,6 +142,7 @@ public partial class @CANNON: IInputActionCollection2, IDisposable
         m_CannonControls = asset.FindActionMap("CannonControls", throwIfNotFound: true);
         m_CannonControls_WASD = m_CannonControls.FindAction("WASD", throwIfNotFound: true);
         m_CannonControls_Release = m_CannonControls.FindAction("Release", throwIfNotFound: true);
+        m_CannonControls_Cancel = m_CannonControls.FindAction("Cancel", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -185,12 +206,14 @@ public partial class @CANNON: IInputActionCollection2, IDisposable
     private List<ICannonControlsActions> m_CannonControlsActionsCallbackInterfaces = new List<ICannonControlsActions>();
     private readonly InputAction m_CannonControls_WASD;
     private readonly InputAction m_CannonControls_Release;
+    private readonly InputAction m_CannonControls_Cancel;
     public struct CannonControlsActions
     {
         private @CANNON m_Wrapper;
         public CannonControlsActions(@CANNON wrapper) { m_Wrapper = wrapper; }
         public InputAction @WASD => m_Wrapper.m_CannonControls_WASD;
         public InputAction @Release => m_Wrapper.m_CannonControls_Release;
+        public InputAction @Cancel => m_Wrapper.m_CannonControls_Cancel;
         public InputActionMap Get() { return m_Wrapper.m_CannonControls; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -206,6 +229,9 @@ public partial class @CANNON: IInputActionCollection2, IDisposable
             @Release.started += instance.OnRelease;
             @Release.performed += instance.OnRelease;
             @Release.canceled += instance.OnRelease;
+            @Cancel.started += instance.OnCancel;
+            @Cancel.performed += instance.OnCancel;
+            @Cancel.canceled += instance.OnCancel;
         }
 
         private void UnregisterCallbacks(ICannonControlsActions instance)
@@ -216,6 +242,9 @@ public partial class @CANNON: IInputActionCollection2, IDisposable
             @Release.started -= instance.OnRelease;
             @Release.performed -= instance.OnRelease;
             @Release.canceled -= instance.OnRelease;
+            @Cancel.started -= instance.OnCancel;
+            @Cancel.performed -= instance.OnCancel;
+            @Cancel.canceled -= instance.OnCancel;
         }
 
         public void RemoveCallbacks(ICannonControlsActions instance)
@@ -237,5 +266,6 @@ public partial class @CANNON: IInputActionCollection2, IDisposable
     {
         void OnWASD(InputAction.CallbackContext context);
         void OnRelease(InputAction.CallbackContext context);
+        void OnCancel(InputAction.CallbackContext context);
     }
 }

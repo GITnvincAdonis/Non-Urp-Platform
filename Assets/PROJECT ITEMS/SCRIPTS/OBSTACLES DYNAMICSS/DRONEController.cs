@@ -203,14 +203,19 @@ public class DRONEController : MonoBehaviour
         
         await Task.Delay(1400);
         _explosionParticles.Play();
-        _droneMesh.SetActive(false);
+        gameObject.SetActive(false);
         CollectableSO.IncrementCollectable();
         _audioEvent.RaiseAudioEventWithVolume(AudioLibrary.instance._rocketExplosion, transform.position, false, .8f);
+        _playerCamManager.RemoveElementFromList(gameObject);
         Destroy(gameObject, .5f);
 
 
     }
-
+    [SerializeField ] PlayerCamManager _playerCamManager;
+    private void OnDestroy()
+    {
+        
+    }
     private void OnTriggerStay(Collider other)
     {
         _playerDestination = _playerPos.position;

@@ -56,6 +56,8 @@ public class PlatformScript : MonoBehaviour
     {
         initialPos = transform.position;    
         if (BehaviourType == PlatformBehaviour.oneWay)  collider.enabled =false;
+
+        LineRenderer = GetComponent<LineRenderer>();    
          
     }
     void Start()
@@ -151,21 +153,54 @@ public class PlatformScript : MonoBehaviour
         rb.isKinematic = false;
         rb.useGravity = true;
     }
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.HSVToRGB(10,100,10);
-         if(BehaviourType == PlatformBehaviour.LineMove)
-        {
-            Gizmos.DrawLine(initialPos, initialPos + Displacement);
-            Gizmos.DrawSphere(initialPos, .4f);
-            Gizmos.DrawSphere(initialPos + Displacement, .4f);
-        }
-    }
+   
     private void OnDestroy()
     {
         foreach (Tween t in tweens) {
             t.Kill();
         }
+    }
+    private LineRenderer LineRenderer;
+    private Vector3[] points;
+    [SerializeField] private Material material;
+
+    private void SetPoints(Vector3[] points)
+    {
+        LineRenderer.positionCount = points.Length;
+        this.points = points;
+    }
+    private void OnEnable()
+    {
+        if(BehaviourType == PlatformBehaviour.LineMove)
+        {
+            GameObject sphere1= GameObject.CreatePrimitive(PrimitiveType.Sphere);
+            GameObject sphere2 = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+
+            sphere1.transform.localScale = new Vector3(.8f,.8f,.8f);
+            sphere2.transform.localScale = new Vector3(.8f, .8f, .8f);
+
+            
+            sphere1.GetComponent<MeshRenderer>().material = material;
+           
+            sphere2.GetComponent<MeshRenderer>().material = material;
+
+            sphere1.GetComponent<SphereCollider>().enabled = false;
+            sphere2.GetComponent<SphereCollider>().enabled=false;
+
+            Vector3[] postions = new Vector3[2];
+            postions[0] = initialPos;
+            sphere1.transform.position = initialPos;
+
+            postions[1] = initialPos + Displacement;
+            sphere2.transform.position = initialPos + Displacement;
+
+            SetPoints(postions);
+            for (int i = 0; i < points.Length; i++)
+            {
+                LineRenderer.SetPosition(i, points[i]);
+            }
+        }
+      
     }
 
 

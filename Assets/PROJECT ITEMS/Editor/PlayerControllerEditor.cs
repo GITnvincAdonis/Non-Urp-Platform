@@ -27,6 +27,8 @@ public class PlatformScriptEditor : Editor
     SerializedProperty upwardsForce;
     SerializedProperty DirectionSource;
 
+    SerializedProperty material;
+
 
 
     private void OnEnable()
@@ -51,6 +53,7 @@ public class PlatformScriptEditor : Editor
 
         upwardsForce = serializedObject.FindProperty("upwardsForce");
         DirectionSource = serializedObject.FindProperty("DirectionSource");
+        material = serializedObject.FindProperty("material");
     }
     public override void OnInspectorGUI()
     {
@@ -68,6 +71,7 @@ public class PlatformScriptEditor : Editor
         {
             EditorGUILayout.PropertyField(Displacement);
             EditorGUILayout.PropertyField(DisplacementDuration);
+            EditorGUILayout.PropertyField(material);
         }
         else if (_scriptController.BehaviourType == PlatformScript.PlatformBehaviour.Bounce)
         {

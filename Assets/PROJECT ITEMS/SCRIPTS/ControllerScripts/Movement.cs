@@ -210,7 +210,7 @@ public class Movement : MonoBehaviour
     {
         bool enabled = context.ReadValueAsButton();
         
-        if (_currentState == States.LauchingState)
+        if (_currentState == States.LauchingState || _currentState == States.LauchState)
         {
             Debug.Log("unparwnt");
             transform.SetParent(null);
@@ -218,6 +218,7 @@ public class Movement : MonoBehaviour
             //_currentState = States.GroundState;
             
         }
+      
 
         else if (_currentState != States.LauchState && _currentlyInInteractZone )
         {
@@ -319,7 +320,7 @@ public class Movement : MonoBehaviour
         if (stateToSwitchTo == States.GroundState || stateToSwitchTo == States.JumpState)
         {
             _collisionParticles.Play();
-            _audioEventSO.RaiseAudioEvent(AudioLibrary.instance._LandingSound, transform.position, true,false);
+            _audioEventSO.RaiseAudioEventWithVolume(AudioLibrary.instance._LandingSound, transform.position, true,20);
         }
         _currentState = stateToSwitchTo;
     }
@@ -479,6 +480,7 @@ public class Movement : MonoBehaviour
 
             }
         }
+        _moveMentSpeed = Mathf.Clamp(_moveMentSpeed, 4, 45);
         _userInterface.ChangeSpeedBar(_moveMentSpeed, transform.position.x, transform.position.y, transform.position.z);
         _upwardForceActor = Mathf.Max(0, _upwardForceActor + _NormalGravity);
         _MoveDestination.y = Mathf.Max(-25, _MoveDestination.y);
